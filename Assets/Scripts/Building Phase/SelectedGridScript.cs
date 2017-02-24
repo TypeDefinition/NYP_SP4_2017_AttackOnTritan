@@ -2,9 +2,11 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class SelectedGridScript : MonoBehaviour
 {
+
     // Check if the placing logic is correct
     private bool isAbleToPlacePrefab;
     // Check if there are enough resources to build
@@ -31,6 +33,12 @@ public class SelectedGridScript : MonoBehaviour
     // Not CSGO. Just the instantiated version of the selectedPrefab, to show where the turret/tower is
     private GameObject showcaseGO;
 
+    public enum PHASE_MODE
+    {
+        LIST_OPEN = 0,
+        LIST_CLOSE
+    } public PHASE_MODE phaseMode;
+
     // Testing
     public Camera mainCamera;
     // Use this for initialization
@@ -38,7 +46,7 @@ public class SelectedGridScript : MonoBehaviour
     {
         isAbleToPlacePrefab = true;
         hasResources = true;
-
+        phaseMode = PHASE_MODE.LIST_OPEN;
         theGridRenderer = GetComponent<Renderer>();
 
         if (theGridSystem == null)
@@ -51,64 +59,34 @@ public class SelectedGridScript : MonoBehaviour
             Debug.Log("Not valid grid");
             return;
         }
-        /*selectedGrid = theGridSystem.GetGrid(startSelectedGridID).GetComponent<Grid>();
+        selectedGrid = theGridSystem.GetGrid(startSelectedGridID).GetComponent<Grid>();
         transform.position = theGridSystem.GetGrid(startSelectedGridID).transform.position;
 
         CanGameobjectBePlaced();
         showcaseGO = GameObject.Instantiate(selectedPrefab);
         showcaseGO.transform.SetParent(transform);
         showcaseGO.transform.position = selectedGrid.transform.position;
-        */
+
 
         // Testing
-        RaycastHit hit;
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit))
-        {
-            if (hit.transform.GetComponent<Grid>() != null)
-            {
-                print(hit.transform.GetComponent<Grid>().GetID());
-                selectedGrid = hit.transform.GetComponent<Grid>();
-                transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position;
-                showcaseGO = GameObject.Instantiate(selectedPrefab);
-                showcaseGO.transform.SetParent(transform);
-                showcaseGO.transform.position = selectedGrid.transform.position;
-            }
-        }
-        CanGameobjectBePlaced();
+        /* RaycastHit hit;
+         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+         if (Physics.Raycast(ray, out hit))
+         {
+             if (hit.transform.GetComponent<Grid>() != null)
+             {
+                 selectedGrid = hit.transform.GetComponent<Grid>();
+                 transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position;
+                 showcaseGO = GameObject.Instantiate(selectedPrefab);
+                 showcaseGO.transform.SetParent(transform);
+                 showcaseGO.transform.position = selectedGrid.transform.position;
+             }
+         }
+         CanGameobjectBePlaced();*/
     }
 
-    // Update is called once per frame
-    void Update()
+    void ListOpenUpdate()
     {
-        /*if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            // Move the tile
-            //SelectedTileToRight();
-            // Translate the selected accordingly
-            ChangeTurretTranslateOnTower();
-            // Check if can be placed
-            CanGameobjectBePlaced();
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-           // SelectedTileToLeft();
-            ChangeTurretTranslateOnTower();
-            CanGameobjectBePlaced();
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            //SelectedTileToUp();
-            ChangeTurretTranslateOnTower();
-            CanGameobjectBePlaced();
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            //SelectedTileToDown();
-            ChangeTurretTranslateOnTower();
-            CanGameobjectBePlaced();
-        }
-        else if (Input.GetKeyDown(KeyCode.Return))*/
         RaycastHit hit;
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit))
@@ -118,19 +96,20 @@ public class SelectedGridScript : MonoBehaviour
                 if (selectedGrid != hit.transform.GetComponent<Grid>())
                 {
                     selectedGrid = hit.transform.GetComponent<Grid>();
-                    transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position;
-                    ChangeTurretTranslateOnTower();
-                    CanGameobjectBePlaced();
+                    transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, 0.1f, 0);
+                    if (selectedPrefab != null)
+                    {
+                        ChangeTurretTranslateOnTower();
+                        CanGameobjectBePlaced();
+                    }
                 }
             }
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (isAbleToPlacePrefab && hasResources)
+                    PlaceGameObject();
+            }
         }
-
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            if (isAbleToPlacePrefab && hasResources)
-                PlaceGameObject();
-        }
-
         // If there is no selection
         if (selectedPrefab == null)
         {
@@ -148,6 +127,97 @@ public class SelectedGridScript : MonoBehaviour
         {
             // Change color to bloody red
             theGridRenderer.material.SetColor("_Color", Color.red);
+        }
+    }
+    void ListCloseUpdate()
+    {
+        if (!buildingPhaseSystem.nextWaveButton.IsActive())
+            buildingPhaseSystem.nextWaveButton.gameObject.SetActive(true);
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.GetComponent<Grid>() != null)
+                {
+                    if (selectedGrid != hit.transform.GetComponent<Grid>())
+                    {
+                        selectedGrid = hit.transform.GetComponent<Grid>();
+                        transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, 0.1f, 0);
+
+                        if (selectedGrid.wall == null && selectedGrid.tower == null)
+                        {
+                            theGridRenderer.material.SetColor("_Color", Color.white);
+                            buildingPhaseSystem.SelectedNothingButton();
+                        }
+                        else if (selectedGrid.tower != null)
+                        {
+                            theGridRenderer.material.SetColor("_Color", Color.green);
+                            buildingPhaseSystem.SelectedTowerButton();
+                        }
+                        else if (selectedGrid.wall != null)
+                        {
+                            theGridRenderer.material.SetColor("_Color", Color.green);
+                            buildingPhaseSystem.SelectedWallButton();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        switch (phaseMode)
+        {
+            case PHASE_MODE.LIST_OPEN:
+                //KeyboardControls();
+                ListOpenUpdate();
+                break;
+
+
+            case PHASE_MODE.LIST_CLOSE:
+                ListCloseUpdate();
+                break;
+        }
+    }
+
+    private void KeyboardControls()
+    {
+        /* if (Input.GetKeyDown(KeyCode.RightArrow))
+         {
+             // Move the tile
+             SelectedTileToRight();
+             // Translate the selected accordingly
+             ChangeTurretTranslateOnTower();
+             // Check if can be placed
+             CanGameobjectBePlaced();
+         }
+         else if (Input.GetKeyDown(KeyCode.LeftArrow))
+         {
+             SelectedTileToLeft();
+             ChangeTurretTranslateOnTower();
+             CanGameobjectBePlaced();
+         }
+         else if (Input.GetKeyDown(KeyCode.UpArrow))
+         {
+             SelectedTileToUp();
+             ChangeTurretTranslateOnTower();
+             CanGameobjectBePlaced();
+         }
+         else if (Input.GetKeyDown(KeyCode.DownArrow))
+         {
+             SelectedTileToDown();
+             ChangeTurretTranslateOnTower();
+             CanGameobjectBePlaced();
+         }*/
+        // else if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (isAbleToPlacePrefab && hasResources)
+                PlaceGameObject();
         }
     }
 
@@ -209,10 +279,11 @@ public class SelectedGridScript : MonoBehaviour
         transform.position = selectedGrid.transform.position;
     }
     */
+
     // Check functions
     private void CheckWallsCanBuild()
     {
-        if(selectedGrid.wall != null)
+        if (selectedGrid.wall != null)
         {
             isAbleToPlacePrefab = false;
             return;
@@ -233,7 +304,8 @@ public class SelectedGridScript : MonoBehaviour
                 isAbleToPlacePrefab = true;
             }
         }
-        Destroy(selectedGrid.wall);
+        //Destroy(selectedGrid.wall);
+        DestroyImmediate(selectedGrid.wall);
     }
     private void CheckTurretsCanBuild()
     {
@@ -268,21 +340,30 @@ public class SelectedGridScript : MonoBehaviour
                 selectedGrid.tower.transform.position = selectedGrid.wall.transform.position;
 
                 CapsuleCollider wallCollider = selectedGrid.wall.GetComponent<CapsuleCollider>();
-                selectedGrid.tower.transform.position = new Vector3(selectedGrid.wall.transform.position.x, (wallCollider.height + wallCollider.center.y) / 2, selectedGrid.wall.transform.position.z); 
-                
+                selectedGrid.tower.transform.position = new Vector3(selectedGrid.wall.transform.position.x, (wallCollider.height + wallCollider.center.y) / 2, selectedGrid.wall.transform.position.z);
+
                 buildingPhaseSystem.amountToBuildTowers -= 1500;
             }
             // The situation when there's no wall is already checked so we skip that
             // If there's a wall and there is a tower
-            else if(selectedGrid.tower != null)
+            else if (selectedGrid.tower != null)
             {
                 // If the tower is of the same type, Upgrade!
-
+                if (selectedGrid.tower.name == showcaseGO.name)
+                {
+                    print("Upgrade!");
+                }
                 // If not, Sell!
+                else
+                {
+                    print("Destroy turret!");
+                    Destroy(selectedGrid.tower);
+                    buildingPhaseSystem.amountToBuildTowers += 1500;
+                }
             }
         }
         // If we are selecting a wall
-        else if(selectedPrefab.CompareTag("Wall"))
+        else if (selectedPrefab.CompareTag("Wall"))
         {
             // If there's no wall
             if (selectedGrid.wall == null)
@@ -292,15 +373,24 @@ public class SelectedGridScript : MonoBehaviour
                 selectedGrid.wall.GetComponent<TurretTowerScript>().tileID = selectedGrid.GetID();
                 selectedGrid.wall.GetComponent<TurretTowerScript>().gridSystem = theGridSystem;
                 buildingPhaseSystem.numberOfBuildableWalls -= 1;
+                CanGameobjectBePlaced();
+            }
+            // Else, remove!
+            else
+            {
+                isAbleToPlacePrefab = false;
             }
         }
         CheckCostAndNumber();
+        buildingPhaseSystem.UpdateText();
     }
+
 
     // Called when the selection of the prefab changes
     public void ChangeSelected()
     {
-        Destroy(showcaseGO);
+        if (showcaseGO)
+            Destroy(showcaseGO);
         if (selectedPrefab == null)
             return;
         showcaseGO = GameObject.Instantiate(selectedPrefab);
@@ -314,11 +404,13 @@ public class SelectedGridScript : MonoBehaviour
     private void ChangeTurretTranslateOnTower()
     {
         if (!selectedPrefab.CompareTag("Turret"))
-            return ;
+            return;
         if (selectedGrid.wall != null)
         {
             CapsuleCollider wallCollider = selectedGrid.wall.GetComponent<CapsuleCollider>();
-            showcaseGO.transform.position = new Vector3(showcaseGO.transform.position.x, (wallCollider.height + wallCollider.center.y) / 2, showcaseGO.transform.position.z); 
+            if (wallCollider == null)
+                return;
+            showcaseGO.transform.position = new Vector3(showcaseGO.transform.position.x, (wallCollider.height + wallCollider.center.y) / 2, showcaseGO.transform.position.z);
         }
         else
         {
@@ -353,6 +445,56 @@ public class SelectedGridScript : MonoBehaviour
             }
         }
 
+    }
+
+    // Functions for other scripts to access our variables and functions
+    public void ChangeToClosePhase()
+    {
+        if (showcaseGO)
+        {
+            Destroy(showcaseGO);
+        }
+        if (selectedGrid.wall == null && selectedGrid.tower == null)
+        {
+            theGridRenderer.material.SetColor("_Color", Color.white);
+            buildingPhaseSystem.SelectedNothingButton();
+        }
+        else if (selectedGrid.tower != null)
+        {
+            theGridRenderer.material.SetColor("_Color", Color.green);
+            buildingPhaseSystem.SelectedTowerButton();
+        }
+        else if (selectedGrid.wall != null)
+        {
+            theGridRenderer.material.SetColor("_Color", Color.green);
+            buildingPhaseSystem.SelectedWallButton();
+        }
+    }
+    public void ChangeToOpenPhase()
+    {
+        ChangeSelected();
+        buildingPhaseSystem.DisableAllButtons();
+    }
+    public int DestroySelectedTurret()
+    {
+        if (selectedGrid.tower == null)
+            return 0;
+        int cost = 1500;
+        Destroy(selectedGrid.tower);
+        buildingPhaseSystem.SelectedWallButton();
+        return cost;
+    }
+    public int DestroySelectedWall()
+    {
+        int cost = DestroySelectedTurret();
+        Destroy(selectedGrid.wall);
+        theGridRenderer.material.SetColor("_Color", Color.white);
+        buildingPhaseSystem.SelectedNothingButton();
+        return cost;
+    }
+    public int UpgradeSelectedTurret()
+    {
+        return 1000;
     }
 }
  

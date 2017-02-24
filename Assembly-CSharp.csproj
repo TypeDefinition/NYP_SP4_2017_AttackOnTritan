@@ -45,6 +45,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Building Phase\BuildingPhaseSystemScript.cs" />
+     <Compile Include="Assets\Scripts\Building Phase\CameraMoveScript.cs" />
+     <Compile Include="Assets\Scripts\Building Phase\PostWaveScript.cs" />
+     <Compile Include="Assets\Scripts\Building Phase\SelectedGridScript.cs" />
+     <Compile Include="Assets\Scripts\Building Phase\TowerListToggleScript.cs" />
+     <Compile Include="Assets\Scripts\Building Phase\TowerPrefabScript.cs" />
+     <Compile Include="Assets\Scripts\Building Phase\TowerSelectPanelScript.cs" />
      <Compile Include="Assets\Scripts\Common\Health.cs" />
      <Compile Include="Assets\Scripts\Grid\Grid.cs" />
      <Compile Include="Assets\Scripts\Grid\GridSystem.cs" />
@@ -68,11 +75,8 @@
      <Compile Include="Assets\Scripts\Monsters\Spawner\MonsterSpawner.cs" />
      <Compile Include="Assets\Scripts\Monsters\Spawner\MonsterSpawnerStage.cs" />
      <Compile Include="Assets\Scripts\Monsters\Spawner\MonsterSpawnerWave.cs" />
-     <Compile Include="Assets\Scripts\Others\BuildingPhaseSystemScript.cs" />
      <Compile Include="Assets\Scripts\Others\CameraRenderScript.cs" />
      <Compile Include="Assets\Scripts\Others\MovementWagon.cs" />
-     <Compile Include="Assets\Scripts\Others\PostWaveScript.cs" />
-     <Compile Include="Assets\Scripts\Others\SelectedGridScript.cs" />
      <Compile Include="Assets\Scripts\SaveFile\GameControl.cs" />
      <Compile Include="Assets\Scripts\Settings\ScreenResolution.cs" />
      <Compile Include="Assets\Scripts\Tritan Crystal\TritanCrystal.cs" />
