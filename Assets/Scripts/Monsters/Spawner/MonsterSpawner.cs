@@ -8,7 +8,11 @@ public class MonsterSpawner : MonoBehaviour {
 
 	//These will be removed in the final product.
 	public bool temporaryTestStartStageButton;
+    public bool temporaryTestStopStageButton;
+    [SerializeField]
 	private int tempStageIndex;
+	[SerializeField]
+	private bool hasActiveMonsters;
 
 	//These 2 have priority.
 	[SerializeField]
@@ -31,9 +35,9 @@ public class MonsterSpawner : MonoBehaviour {
 	private GameObject[] monsterPrefabs = new GameObject[(uint)MONSTER_TYPE.NUM_MONSTER_TYPE]; //Do not change the size!
 	private List<GameObject>[] monsterPool;
 	private int[] monsterPoolIndex; //Our last searched index;
-
-	// Use this for like, initialization even before initialization. Initializationception!
-	void Awake() {		
+	
+    // Use this for like, initialization even before initialization. Initializationception!
+	void Awake() {
 		GeneratePath();
 		monsterPool = new List<GameObject>[(uint)MONSTER_TYPE.NUM_MONSTER_TYPE];
 		for (int i = 0; i < monsterPool.Length; ++i) {
@@ -43,7 +47,10 @@ public class MonsterSpawner : MonoBehaviour {
 		for (int i = 0; i < monsterPoolIndex.Length; ++i) {
 			monsterPoolIndex[i] = 0;
 		}
-	}
+
+        temporaryTestStartStageButton = false;
+        temporaryTestStopStageButton = false;
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -56,8 +63,14 @@ public class MonsterSpawner : MonoBehaviour {
 			temporaryTestStartStageButton = false;
 			++tempStageIndex;
 		}
+        if (temporaryTestStopStageButton) {
+            StopAllStages();
+            temporaryTestStopStageButton = false;
+            tempStageIndex = 0;
+        }
+		hasActiveMonsters = HasActiveMonsters();
 
-		//Don't change this. If you do I'll just keep changing it back.
+		//Don't change the size. If you do I'll just keep changing it back.
 		//We migh also crash. Probably crash.
 		if (monsterPrefabs.Length != (uint)MONSTER_TYPE.NUM_MONSTER_TYPE) {
 			monsterPrefabs = new GameObject[(uint)MONSTER_TYPE.NUM_MONSTER_TYPE];
@@ -104,7 +117,7 @@ public class MonsterSpawner : MonoBehaviour {
 			print(gameObject.name + " cannot spawn monster as monster type prefab is null.");
 			return false;
 		} else if (monsterPrefabs[(uint)_monsterType].GetComponent<AIFollowPath>() == null) {
-			print(gameObject.name + " cannot spawn a monster with AIMovement Component!");
+			print(gameObject.name + " cannot spawn a monster without AIFollowPath Component!");
 			return false;
 		}
 
@@ -193,7 +206,7 @@ public class MonsterSpawner : MonoBehaviour {
 		if (_stageIndex < 0) {
 			return false;
 		}
-
+        
 		int index = 0;
 		foreach (Transform child in transform) {
 			//Check if it is a stage.
@@ -204,6 +217,8 @@ public class MonsterSpawner : MonoBehaviour {
 
 			//Yes, this is the right one. We can stop now.
 			if (_stageIndex == index++) {
+                //Stop all other stages.
+                StopAllStages();
 				stage.StartStage();
 				return true;
 			}
@@ -212,13 +227,8 @@ public class MonsterSpawner : MonoBehaviour {
 		return false;
 	}
 
-	//For whatever reason we need to stop it.
-	public bool StopStage(int _stageIndex) {
-		if (_stageIndex < 0) {
-			return false;
-		}
-
-		int index = 0;
+	//If for whatever reason we need to stop it, like when the game ends.
+	public void StopAllStages() {
 		foreach (Transform child in transform) {
 			//Check if it is a stage.
 			MonsterSpawnerStage stage = child.gameObject.GetComponent<MonsterSpawnerStage>();
@@ -226,14 +236,22 @@ public class MonsterSpawner : MonoBehaviour {
 				continue;
 			}
 
-			//Yes, this is the right one. We can stop now.
-			if (_stageIndex == index++) {
-				stage.StopStage(); //停！
-				return true;
+			stage.StopStage(); //停！
+		}
+        ClearMonsters();
+        print("Clear");
+	}
+
+	//This seems... unoptimised. No noticable framerate decrease for now.
+    public bool HasActiveMonsters() {
+		for (int i = 0; i < monsterPool.Length; ++i) {
+			for (int j = 0; j < monsterPool[i].Count; ++j) {
+				if (monsterPool[i][j].activeSelf == true) {
+					return true;
+				}
 			}
 		}
-
 		return false;
-	}
+    }
 
 }

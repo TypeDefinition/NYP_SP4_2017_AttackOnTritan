@@ -1,9 +1,10 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Editor\GridMenu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Shaders\CelSurfaceShaderTerrain.shader">
     <Files>
-      <File FileName="Assets\Editor\GridMenu.cs" Line="10" Column="40" />
-      <File FileName="Assets\Scripts\Grid\GridSystem.cs" Line="460" Column="57" />
+      <File FileName="Assets\Shaders\CelSurfaceShader.shader" Line="76" Column="4" />
+      <File FileName="Assets\Shaders\CelSurfaceShaderLeaves.shader" Line="10" Column="53" />
+      <File FileName="Assets\Shaders\CelSurfaceShaderTerrain.shader" Line="14" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

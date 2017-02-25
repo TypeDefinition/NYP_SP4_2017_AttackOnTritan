@@ -61,7 +61,7 @@ public class MonsterSpawnerStage : MonoBehaviour {
 
 		//Recursively do this.
 		foreach (Transform child in _transform) {
-			EnableWaves(child);
+			DisableWaves(child);
 		}
 	}
 
