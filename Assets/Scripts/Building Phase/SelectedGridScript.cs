@@ -63,10 +63,10 @@ public class SelectedGridScript : MonoBehaviour
         selectedGrid = theGridSystem.GetGrid(startSelectedGridID).GetComponent<Grid>();
         transform.position = theGridSystem.GetGrid(startSelectedGridID).transform.position;
 
-        CanGameobjectBePlaced();
         showcaseGO = GameObject.Instantiate(selectedPrefab);
         showcaseGO.transform.SetParent(transform);
         showcaseGO.transform.position = selectedGrid.transform.position;
+        CanGameobjectBePlaced();
     }
 
     void ListOpenUpdate()
@@ -81,7 +81,7 @@ public class SelectedGridScript : MonoBehaviour
                 if (selectedGrid != hit.transform.GetComponent<Grid>())
                 {
                     selectedGrid = hit.transform.GetComponent<Grid>();
-                    transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, -0.1f, 0);
+                    transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, 0.2f, 0);
                     if (selectedPrefab != null)
                     {
                         ChangeTurretTranslateOnTower();
@@ -133,7 +133,7 @@ public class SelectedGridScript : MonoBehaviour
                     if (selectedGrid != hit.transform.GetComponent<Grid>())
                     {
                         selectedGrid = hit.transform.GetComponent<Grid>();
-                        transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, -0.1f, 0);
+                        transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, 0.2f, 0);
 
                         if (selectedGrid.wall == null && selectedGrid.tower == null)
                         {
@@ -286,7 +286,7 @@ public class SelectedGridScript : MonoBehaviour
             if (wallCollider == null)
                 return;
             showcaseGO.transform.position = new Vector3(showcaseGO.transform.position.x, (wallCollider.height + wallCollider.center.y) / 2, showcaseGO.transform.position.z);
-        }
+         }
         else
         {
             showcaseGO.transform.position = selectedGrid.transform.position;

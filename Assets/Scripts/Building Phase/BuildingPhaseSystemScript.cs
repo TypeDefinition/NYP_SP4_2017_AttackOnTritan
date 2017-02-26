@@ -33,6 +33,7 @@ public class BuildingPhaseSystemScript : MonoBehaviour {
             return;
         }
         selectingGrid.selectedPrefab = towerPrefabs[0];
+        selectingGrid.ChangeSelected();
         UpdateText();
 
         if (sellTurretButton ||
