@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SelectedGridScript : MonoBehaviour
 {
@@ -66,29 +67,13 @@ public class SelectedGridScript : MonoBehaviour
         showcaseGO = GameObject.Instantiate(selectedPrefab);
         showcaseGO.transform.SetParent(transform);
         showcaseGO.transform.position = selectedGrid.transform.position;
-
-
-        // Testing
-        /* RaycastHit hit;
-         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-         if (Physics.Raycast(ray, out hit))
-         {
-             if (hit.transform.GetComponent<Grid>() != null)
-             {
-                 selectedGrid = hit.transform.GetComponent<Grid>();
-                 transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position;
-                 showcaseGO = GameObject.Instantiate(selectedPrefab);
-                 showcaseGO.transform.SetParent(transform);
-                 showcaseGO.transform.position = selectedGrid.transform.position;
-             }
-         }
-         CanGameobjectBePlaced();*/
     }
 
     void ListOpenUpdate()
     {
         RaycastHit hit;
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+       
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.transform.GetComponent<Grid>() != null)
@@ -96,7 +81,7 @@ public class SelectedGridScript : MonoBehaviour
                 if (selectedGrid != hit.transform.GetComponent<Grid>())
                 {
                     selectedGrid = hit.transform.GetComponent<Grid>();
-                    transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, 0.1f, 0);
+                    transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, -0.1f, 0);
                     if (selectedPrefab != null)
                     {
                         ChangeTurretTranslateOnTower();
@@ -106,6 +91,10 @@ public class SelectedGridScript : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0))
             {
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    return;
+                }
                 if (isAbleToPlacePrefab && hasResources)
                     PlaceGameObject();
             }
@@ -144,7 +133,7 @@ public class SelectedGridScript : MonoBehaviour
                     if (selectedGrid != hit.transform.GetComponent<Grid>())
                     {
                         selectedGrid = hit.transform.GetComponent<Grid>();
-                        transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, 0.1f, 0);
+                        transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, -0.1f, 0);
 
                         if (selectedGrid.wall == null && selectedGrid.tower == null)
                         {
@@ -183,103 +172,6 @@ public class SelectedGridScript : MonoBehaviour
                 break;
         }
     }
-
-    private void KeyboardControls()
-    {
-        /* if (Input.GetKeyDown(KeyCode.RightArrow))
-         {
-             // Move the tile
-             SelectedTileToRight();
-             // Translate the selected accordingly
-             ChangeTurretTranslateOnTower();
-             // Check if can be placed
-             CanGameobjectBePlaced();
-         }
-         else if (Input.GetKeyDown(KeyCode.LeftArrow))
-         {
-             SelectedTileToLeft();
-             ChangeTurretTranslateOnTower();
-             CanGameobjectBePlaced();
-         }
-         else if (Input.GetKeyDown(KeyCode.UpArrow))
-         {
-             SelectedTileToUp();
-             ChangeTurretTranslateOnTower();
-             CanGameobjectBePlaced();
-         }
-         else if (Input.GetKeyDown(KeyCode.DownArrow))
-         {
-             SelectedTileToDown();
-             ChangeTurretTranslateOnTower();
-             CanGameobjectBePlaced();
-         }*/
-        // else if (Input.GetKeyDown(KeyCode.Return))
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            if (isAbleToPlacePrefab && hasResources)
-                PlaceGameObject();
-        }
-    }
-
-    // To move the tile in 4 directions 
-    /*private void SelectedTileToRight()
-    {
-        // Right
-        int index = selectedGrid.transform.GetSiblingIndex();
-        if (selectedGrid.GetID() / theGridSystem.GetNumColumns() !=
-            theGridSystem.transform.GetChild(index + 1).GetComponent<Grid>().GetID() / theGridSystem.GetNumColumns())
-            return;
-
-        selectedGrid = theGridSystem.transform.GetChild(index + 1).GetComponent<Grid>();
-        transform.position = selectedGrid.transform.position;
-    }
-    private void SelectedTileToLeft()
-    {
-        // Left
-        int index = selectedGrid.transform.GetSiblingIndex();
-        if (selectedGrid.GetID() % theGridSystem.GetNumColumns() == 0)
-            return;
-        if (selectedGrid.GetID() / theGridSystem.GetNumColumns() !=
-            theGridSystem.transform.GetChild(index - 1).GetComponent<Grid>().GetID() / theGridSystem.GetNumColumns())
-            return;
-        selectedGrid = theGridSystem.transform.GetChild(index - 1).GetComponent<Grid>();
-        transform.position = selectedGrid.transform.position;
-    }
-    private void SelectedTileToUp()
-    {
-        // Up
-        int row = selectedGrid.GetID() / theGridSystem.GetNumColumns();
-        if (row == theGridSystem.GetNumRows())
-            return;
-        int nextID = selectedGrid.GetID() + theGridSystem.GetNumColumns();
-        while (theGridSystem.GetGrid(nextID) == null)
-        {
-            if (nextID / theGridSystem.GetNumColumns() == theGridSystem.GetNumRows())
-                return;
-            nextID += theGridSystem.GetNumColumns();
-        }
-        selectedGrid = theGridSystem.GetGrid(nextID).GetComponent<Grid>();
-
-        transform.position = selectedGrid.transform.position;
-    }
-    private void SelectedTileToDown()
-    {
-        // Down
-        int row = selectedGrid.GetID() / theGridSystem.GetNumColumns();
-        if (row == 0)
-            return;
-        int nextID = selectedGrid.GetID() - theGridSystem.GetNumColumns();
-        while (theGridSystem.GetGrid(nextID) == null)
-        {
-            if (nextID / theGridSystem.GetNumColumns() == 0)
-                return;
-            nextID -= theGridSystem.GetNumColumns();
-        }
-        selectedGrid = theGridSystem.GetGrid(nextID).GetComponent<Grid>();
-        transform.position = selectedGrid.transform.position;
-    }
-    */
-
     // Check functions
     private void CheckWallsCanBuild()
     {
@@ -304,7 +196,6 @@ public class SelectedGridScript : MonoBehaviour
                 isAbleToPlacePrefab = true;
             }
         }
-        //Destroy(selectedGrid.wall);
         DestroyImmediate(selectedGrid.wall);
     }
     private void CheckTurretsCanBuild()
@@ -344,23 +235,6 @@ public class SelectedGridScript : MonoBehaviour
 
                 buildingPhaseSystem.amountToBuildTowers -= 1500;
             }
-            // The situation when there's no wall is already checked so we skip that
-            // If there's a wall and there is a tower
-            else if (selectedGrid.tower != null)
-            {
-                // If the tower is of the same type, Upgrade!
-                if (selectedGrid.tower.name == showcaseGO.name)
-                {
-                    print("Upgrade!");
-                }
-                // If not, Sell!
-                else
-                {
-                    print("Destroy turret!");
-                    Destroy(selectedGrid.tower);
-                    buildingPhaseSystem.amountToBuildTowers += 1500;
-                }
-            }
         }
         // If we are selecting a wall
         else if (selectedPrefab.CompareTag("Wall"))
@@ -372,6 +246,7 @@ public class SelectedGridScript : MonoBehaviour
                 selectedGrid.wall.AddComponent<TurretTowerScript>();
                 selectedGrid.wall.GetComponent<TurretTowerScript>().tileID = selectedGrid.GetID();
                 selectedGrid.wall.GetComponent<TurretTowerScript>().gridSystem = theGridSystem;
+                selectedGrid.wall.transform.SetParent(selectedGrid.transform);
                 buildingPhaseSystem.numberOfBuildableWalls -= 1;
                 CanGameobjectBePlaced();
             }
@@ -421,7 +296,6 @@ public class SelectedGridScript : MonoBehaviour
     // A function to check if there is still enough currency and walls to keep building, else turn the grid red
     private void CheckCostAndNumber()
     {
-        print(buildingPhaseSystem.amountToBuildTowers + "," + buildingPhaseSystem.numberOfBuildableWalls);
         if (selectedPrefab.CompareTag("Turret"))
         {
             if (buildingPhaseSystem.amountToBuildTowers < 1500 /*selectedPrefab get cost whatsoever*/)

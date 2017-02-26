@@ -6,6 +6,7 @@ public class TowerListToggleScript : MonoBehaviour {
 
     public SelectedGridScript selectedGrid;
     private Toggle thisToggle;
+    public Animator animator;
 	// Use this for initialization
 	void Start () {
 	    if(selectedGrid == null)
@@ -27,6 +28,7 @@ public class TowerListToggleScript : MonoBehaviour {
             if (thisToggle.isOn)
                 return;
             selectedGrid.phaseMode = SelectedGridScript.PHASE_MODE.LIST_CLOSE;
+            animator.Play("CloseList");
             selectedGrid.ChangeToClosePhase();
         }
         else if(selectedGrid.phaseMode == SelectedGridScript.PHASE_MODE.LIST_CLOSE)
@@ -34,6 +36,7 @@ public class TowerListToggleScript : MonoBehaviour {
             if (!thisToggle.isOn)
                 return;
             selectedGrid.phaseMode = SelectedGridScript.PHASE_MODE.LIST_OPEN;
+            animator.Play("OpenList");
             selectedGrid.ChangeToOpenPhase();
         }
     }
