@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class TowerSelectPanelScript : MonoBehaviour {
@@ -12,6 +13,8 @@ public class TowerSelectPanelScript : MonoBehaviour {
     // The group of toggles
     public ToggleGroup towerToggleGroup;
     // To store the tower prefabs from buildiPhaseSystem
+    public List<Sprite> sprites;
+
     private GameObject[] towerPrefabs;
 
 	// Use this for initialization
@@ -35,33 +38,31 @@ public class TowerSelectPanelScript : MonoBehaviour {
             print("No towers;"); return;
         }
 
-        float yPos = 0;
-        float prefabScaleHeight = 0;
         for (int i = 0; i < towerPrefabs.Length; ++i)
         {
             GameObject towerGO = GameObject.Instantiate(towerSelectPrefab);
             TowerPrefabScript towerGOScript = towerGO.GetComponent<TowerPrefabScript>();
             towerGOScript.towerName = towerPrefabs[i].name;
-            towerGOScript.towerCost = 1000 + i;
             towerGOScript.towerPrefab = towerPrefabs[i];
             towerGOScript.buildingPhaseSystem = buildingPhaseSystem;
 
+            if (towerPrefabs[i].CompareTag("Wall"))
+            {
+                towerGOScript.towerCost = 1;
+                towerGOScript.costImage = sprites[0];
+            }
+            else
+            {
+                towerGOScript.towerCost = 1000 + i;
+                towerGOScript.costImage = sprites[1];
+            }
             Transform parentTransform = gameObject.transform.parent;
 
             towerGO.GetComponent<Toggle>().group = towerToggleGroup;
             towerGO.transform.SetParent(content.transform);
-            
-            yPos -= towerGO.GetComponent<RectTransform>().rect.height / 2;
-
-            towerGO.transform.localScale = content.transform.localScale;
-            towerGO.transform.localPosition = new Vector3(0, yPos, 0) ;
-            
-            yPos -= towerGO.GetComponent<RectTransform>().rect.height / 2;
-            if(prefabScaleHeight < towerGO.GetComponent<RectTransform>().rect.height)
-                prefabScaleHeight = towerGO.GetComponent<RectTransform>().rect.height;
-                
+            towerGO.transform.localScale = content.transform.localScale;    
         }
-        content.GetComponent<RectTransform>().sizeDelta = new Vector2(content.GetComponent<RectTransform>().rect.width, prefabScaleHeight * towerPrefabs.Length);
+
 	}
 	
 	// Update is called once per frame

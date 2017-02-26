@@ -103,6 +103,8 @@
     <Compile Include="Assets\Scripts\Turrets\MachineGunScript.cs" />
     <Compile Include="Assets\Scripts\Turrets\Mortar\MortarProjectileScript.cs" />
     <Compile Include="Assets\Scripts\Turrets\Mortar\MortarScript.cs" />
+    <Compile Include="Assets\Scripts\Turrets\Snow Crystal\SnowCrystalScript.cs" />
+    <Compile Include="Assets\Scripts\Turrets\Snow Crystal\SnowStormScript.cs" />
     <Compile Include="Assets\Scripts\Turrets\TeslaScript.cs" />
     <Compile Include="Assets\Scripts\Turrets\TestScript.cs" />
     <Compile Include="Assets\Scripts\Turrets\TurretScript.cs" />
@@ -161,6 +163,7 @@
   <ItemGroup>
     <None Include="Assets\Shaders\CelSurfaceShader.shader" />
     <None Include="Assets\Shaders\CelSurfaceShaderLeaves.shader" />
+    <None Include="Assets\Shaders\CelSurfaceShaderTerrain.shader" />
     <None Include="Assets\Unity Assets\ENTIGI\Readme.txt" />
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />

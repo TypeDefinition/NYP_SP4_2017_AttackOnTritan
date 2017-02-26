@@ -4,10 +4,11 @@ using System.Collections;
 public class CameraMoveScript : MonoBehaviour {
 
     [SerializeField]
-    private float speed; 
+    private float speed;
+
 	// Use this for initialization
 	void Start () {
-	    
+
 	}
 	
 	// Update is called once per frame
