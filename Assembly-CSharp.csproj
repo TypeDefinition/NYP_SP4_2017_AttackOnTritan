@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{BEB06057-295F-A2D7-1C12-2993039C7468}</ProjectGuid>
+    <ProjectGuid>{3C01B659-B68C-9F69-C337-BD0E5447DBB4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -85,6 +85,8 @@
      <Compile Include="Assets\Scripts\Turrets\MachineGunScript.cs" />
      <Compile Include="Assets\Scripts\Turrets\Mortar\MortarProjectileScript.cs" />
      <Compile Include="Assets\Scripts\Turrets\Mortar\MortarScript.cs" />
+     <Compile Include="Assets\Scripts\Turrets\Snow Crystal\SnowCrystalScript.cs" />
+     <Compile Include="Assets\Scripts\Turrets\Snow Crystal\SnowStormScript.cs" />
      <Compile Include="Assets\Scripts\Turrets\TeslaScript.cs" />
      <Compile Include="Assets\Scripts\Turrets\TestScript.cs" />
      <Compile Include="Assets\Scripts\Turrets\TurretScript.cs" />
@@ -144,6 +146,7 @@
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
+     <None Include="Assets\Shaders\CelSurfaceShaderTerrain.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\info snow assets.txt" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\ShowAlphaChannel.shader" />
      <None Include="Assets\Unity Assets\Skybox Pack1\read me.txt" />

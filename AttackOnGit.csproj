@@ -58,12 +58,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -169,6 +163,7 @@
   <ItemGroup>
     <None Include="Assets\Shaders\CelSurfaceShader.shader" />
     <None Include="Assets\Shaders\CelSurfaceShaderLeaves.shader" />
+    <None Include="Assets\Shaders\CelSurfaceShaderTerrain.shader" />
     <None Include="Assets\Unity Assets\ENTIGI\Readme.txt" />
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />

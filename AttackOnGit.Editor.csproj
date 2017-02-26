@@ -122,6 +122,7 @@
   <ItemGroup>
     <None Include="Assets\Shaders\CelSurfaceShader.shader" />
     <None Include="Assets\Shaders\CelSurfaceShaderLeaves.shader" />
+    <None Include="Assets\Shaders\CelSurfaceShaderTerrain.shader" />
     <None Include="Assets\Unity Assets\ENTIGI\Readme.txt" />
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
