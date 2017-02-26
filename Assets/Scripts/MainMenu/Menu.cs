@@ -109,7 +109,14 @@ public class Menu : MonoBehaviour {
     {
         SceneManager.LoadScene("Showcase");
         PlayOn();
+    }   
+
+    public void GoToLevel1()
+    {
+        SceneManager.LoadScene("Level_1");
+        PlayOn();
     }
+
 
     public void PauseTime()
     {
