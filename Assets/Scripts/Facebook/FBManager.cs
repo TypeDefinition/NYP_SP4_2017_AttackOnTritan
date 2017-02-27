@@ -107,7 +107,7 @@ public class FBManager : MonoBehaviour {
         }
         else
         {
-            AppLinkURL = "http://google.com";
+            AppLinkURL = "https://www.youtube.com/watch?v=M94VA4cSTuc";
         }
     }
 
