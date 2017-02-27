@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\Building Phase\TowerListToggleScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\TowerPrefabScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\TowerSelectPanelScript.cs" />
+     <Compile Include="Assets\Scripts\Common\Billboard.cs" />
      <Compile Include="Assets\Scripts\Common\Health.cs" />
      <Compile Include="Assets\Scripts\Grid\Grid.cs" />
      <Compile Include="Assets\Scripts\Grid\GridSystem.cs" />
