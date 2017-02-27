@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{E1D0C2DE-4ACC-F509-AE49-FF1A23E7D553}</ProjectGuid>
+    <ProjectGuid>{8A616F83-434F-9003-0EDD-3A6D66332F1F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -47,6 +47,16 @@
   <ItemGroup>
      <Compile Include="Assets\Editor\GameSettingsWindow.cs" />
      <Compile Include="Assets\Editor\GridMenu.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\FacebookBuild.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\FacebookConsoleEndpoint.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\FacebookPostprocess.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\FacebookSettingsEditor.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\Utility.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\android\FacebookAndroidUtil.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\android\ManifestMod.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\iOS\FixupFiles.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\iOS\PListDict.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\iOS\PListParser.cs" />
      <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Editor\ImageEffects\AntialiasingEditor.cs" />
      <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Editor\ImageEffects\BloomAndFlaresEditor.cs" />
      <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Editor\ImageEffects\BloomEditor.cs" />
@@ -64,6 +74,7 @@
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
+     <None Include="Assets\FacebookSDK\SDK\Editor\android\DefaultAndroidManifest.xml" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
      <None Include="Assets\Shaders\CelSurfaceShaderTerrain.shader" />
@@ -92,6 +103,7 @@
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset3.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
      <None Include="Assets\Unity Assets\ENTIGI\Readme.txt" />
+     <None Include="Assets\Unity Assets\Monster Sounds - Engebretsen musikk\readme.txt" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />
@@ -137,6 +149,7 @@
      <None Include="Assets\Shaders\CelSurfaceShader.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAA2.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrection3DLut.shader" />
+     <None Include="Assets\FacebookSDK\SDK\Scripts\Canvas\Resources\JSSDKBindings.txt" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\LensFlareCreate.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\EdgeDetectNormals.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\PrepareSunShaftsBlur.shader" />
@@ -152,7 +165,7 @@
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
  <Reference Include="Assembly-UnityScript">
- <HintPath>D:/School Work/Year 2/Studio Project 4/Attack on Tritan/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+ <HintPath>C:/Users/admin1/Desktop/AttackOnGit/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -190,7 +203,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{BEB06057-295F-A2D7-1C12-2993039C7468}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{3C01B659-B68C-9F69-C337-BD0E5447DBB4}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

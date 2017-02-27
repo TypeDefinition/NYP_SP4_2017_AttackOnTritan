@@ -40,4 +40,11 @@ public class TowerListToggleScript : MonoBehaviour {
             selectedGrid.ChangeToOpenPhase();
         }
     }
+
+    public void Reset()
+    {
+        thisToggle.isOn = true;
+        selectedGrid.phaseMode = SelectedGridScript.PHASE_MODE.LIST_OPEN;
+        selectedGrid.ChangeToOpenPhase();
+    }
 }

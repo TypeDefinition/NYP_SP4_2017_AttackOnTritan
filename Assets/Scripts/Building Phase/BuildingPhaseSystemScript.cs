@@ -19,13 +19,19 @@ public class BuildingPhaseSystemScript : MonoBehaviour {
     public Text wall;
     public Text currency;
 
+    [SerializeField]
+    private int startGameWalls;
+    [SerializeField]
+    private int startGameCurrency;
+
     // Use this for initialization
     void Start()
     {
-        amountToBuildTowers = 10000;
-        numberOfBuildableWalls = 10;
+        numberOfBuildableWalls = startGameWalls;
+        amountToBuildTowers = startGameCurrency;
         if (selectingGrid == null)
         {
+            Debug.Log("Building phase system no selecting script");
             return;
         }
         if (towerPrefabs.Length <= 0)
@@ -68,6 +74,7 @@ public class BuildingPhaseSystemScript : MonoBehaviour {
     public void UpgradeTurret()
     {
         amountToBuildTowers -= selectingGrid.UpgradeSelectedTurret();
+        selectingGrid.CheckTowerUpdate();
         UpdateText();
     }
 
@@ -80,7 +87,7 @@ public class BuildingPhaseSystemScript : MonoBehaviour {
     {
         sellTurretButton.gameObject.SetActive(true);
         sellWallButton.gameObject.SetActive(true);
-        upgradeButton.gameObject.SetActive(true);
+        selectingGrid.CheckTowerUpdate();
     }
 
     public void SelectedWallButton()

@@ -158,11 +158,13 @@
     <Compile Include="Assets\FacebookSDK\SDK\Scripts\Utils\Utilities.cs" />
     <Compile Include="Assets\Scripts\Building Phase\BuildingPhaseSystemScript.cs" />
     <Compile Include="Assets\Scripts\Building Phase\CameraMoveScript.cs" />
-    <Compile Include="Assets\Scripts\Building Phase\PostWaveScript.cs" />
+    <Compile Include="Assets\Scripts\Building Phase\PostStageScript.cs" />
     <Compile Include="Assets\Scripts\Building Phase\SelectedGridScript.cs" />
+    <Compile Include="Assets\Scripts\Building Phase\StartStageScript.cs" />
     <Compile Include="Assets\Scripts\Building Phase\TowerListToggleScript.cs" />
     <Compile Include="Assets\Scripts\Building Phase\TowerPrefabScript.cs" />
     <Compile Include="Assets\Scripts\Building Phase\TowerSelectPanelScript.cs" />
+    <Compile Include="Assets\Scripts\Common\Billboard.cs" />
     <Compile Include="Assets\Scripts\Common\Health.cs" />
     <Compile Include="Assets\Scripts\Facebook\FBManager.cs" />
     <Compile Include="Assets\Scripts\Facebook\FBScript.cs" />
@@ -345,6 +347,7 @@
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\info snow assets.txt" />
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\info.txt" />
+    <None Include="Assets\Unity Assets\Monster Sounds - Engebretsen musikk\readme.txt" />
     <None Include="Assets\Unity Assets\Nebula Skyboxes\Nebula Skyboxes - Readme.txt" />
     <None Include="Assets\Unity Assets\Skybox Pack1\read me.txt" />
   </ItemGroup>
