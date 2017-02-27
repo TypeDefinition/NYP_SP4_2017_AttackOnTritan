@@ -62,11 +62,12 @@ public class SelectedGridScript : MonoBehaviour
         }
         selectedGrid = theGridSystem.GetGrid(startSelectedGridID).GetComponent<Grid>();
         transform.position = theGridSystem.GetGrid(startSelectedGridID).transform.position;
+        theGridSystem.RenderGrids(true);
 
-        CanGameobjectBePlaced();
         showcaseGO = GameObject.Instantiate(selectedPrefab);
         showcaseGO.transform.SetParent(transform);
         showcaseGO.transform.position = selectedGrid.transform.position;
+        CanGameobjectBePlaced();
     }
 
     void ListOpenUpdate()
@@ -81,7 +82,7 @@ public class SelectedGridScript : MonoBehaviour
                 if (selectedGrid != hit.transform.GetComponent<Grid>())
                 {
                     selectedGrid = hit.transform.GetComponent<Grid>();
-                    transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, -0.1f, 0);
+                    transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, -0.05f, 0);
                     if (selectedPrefab != null)
                     {
                         ChangeTurretTranslateOnTower();
@@ -133,7 +134,7 @@ public class SelectedGridScript : MonoBehaviour
                     if (selectedGrid != hit.transform.GetComponent<Grid>())
                     {
                         selectedGrid = hit.transform.GetComponent<Grid>();
-                        transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, -0.1f, 0);
+                        transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, -0.05f, 0);
 
                         if (selectedGrid.wall == null && selectedGrid.tower == null)
                         {
@@ -183,10 +184,8 @@ public class SelectedGridScript : MonoBehaviour
         selectedGrid.wall = new GameObject();
         for (int i = 0; i < spawners.Length; ++i)
         {
-            int startID = spawners[i].GetComponent<MonsterSpawner>()._startID;
-            int endID = spawners[i].GetComponent<MonsterSpawner>()._endID;
-            List<int> path = theGridSystem.Search(startID, endID);
-            if (path == null)
+            bool hasPath = spawners[i].GetComponent<MonsterSpawner>().GeneratePath();
+            if (hasPath == false)
             {
                 isAbleToPlacePrefab = false;
                 break;
@@ -200,7 +199,7 @@ public class SelectedGridScript : MonoBehaviour
     }
     private void CheckTurretsCanBuild()
     {
-        isAbleToPlacePrefab = (selectedGrid.wall != null);
+        isAbleToPlacePrefab = (selectedGrid.wall != null && selectedGrid.tower == null);
     }
 
     // Call the above check functions according to the selection and changing the selection grid color accordingly
@@ -248,7 +247,6 @@ public class SelectedGridScript : MonoBehaviour
                 selectedGrid.wall.GetComponent<TurretTowerScript>().gridSystem = theGridSystem;
                 selectedGrid.wall.transform.SetParent(selectedGrid.transform);
                 buildingPhaseSystem.numberOfBuildableWalls -= 1;
-                CanGameobjectBePlaced();
             }
             // Else, remove!
             else
@@ -257,6 +255,7 @@ public class SelectedGridScript : MonoBehaviour
             }
         }
         CheckCostAndNumber();
+        CanGameobjectBePlaced();
         buildingPhaseSystem.UpdateText();
     }
 
@@ -271,9 +270,11 @@ public class SelectedGridScript : MonoBehaviour
         showcaseGO = GameObject.Instantiate(selectedPrefab);
         showcaseGO.transform.SetParent(transform);
         showcaseGO.transform.position = transform.position;
+        
         CanGameobjectBePlaced();
         ChangeTurretTranslateOnTower();
         CheckCostAndNumber();
+        CheckTowerUpdate();
     }
     // A function for the turrets, to put the selection of the prefab *above* the wall to make it look realistic
     private void ChangeTurretTranslateOnTower()
@@ -286,7 +287,7 @@ public class SelectedGridScript : MonoBehaviour
             if (wallCollider == null)
                 return;
             showcaseGO.transform.position = new Vector3(showcaseGO.transform.position.x, (wallCollider.height + wallCollider.center.y) / 2, showcaseGO.transform.position.z);
-        }
+         }
         else
         {
             showcaseGO.transform.position = selectedGrid.transform.position;
@@ -319,6 +320,27 @@ public class SelectedGridScript : MonoBehaviour
             }
         }
 
+    }
+    public void CheckTowerUpdate()
+    {
+        if (selectedGrid.tower == null)
+        {
+            buildingPhaseSystem.upgradeButton.gameObject.SetActive(false);
+            return;
+        }
+        else if (selectedGrid.tower.GetComponentInChildren<TurretScript>().Level > 2)
+        {
+            buildingPhaseSystem.upgradeButton.gameObject.SetActive(false);
+        }
+        else if (buildingPhaseSystem.amountToBuildTowers < 1000)
+        {
+            buildingPhaseSystem.upgradeButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            if (phaseMode == PHASE_MODE.LIST_CLOSE)
+                buildingPhaseSystem.upgradeButton.gameObject.SetActive(true);
+        }
     }
 
     // Functions for other scripts to access our variables and functions
@@ -353,6 +375,7 @@ public class SelectedGridScript : MonoBehaviour
     {
         if (selectedGrid.tower == null)
             return 0;
+
         int cost = 1500;
         Destroy(selectedGrid.tower);
         buildingPhaseSystem.SelectedWallButton();
@@ -368,7 +391,8 @@ public class SelectedGridScript : MonoBehaviour
     }
     public int UpgradeSelectedTurret()
     {
-        return 1000;
+       selectedGrid.tower.GetComponentInChildren<TurretScript>().Level += 1;
+       return 2000;
     }
 }
  

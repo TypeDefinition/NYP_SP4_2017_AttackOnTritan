@@ -47,6 +47,16 @@
   <ItemGroup>
      <Compile Include="Assets\Editor\GameSettingsWindow.cs" />
      <Compile Include="Assets\Editor\GridMenu.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\FacebookBuild.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\FacebookConsoleEndpoint.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\FacebookPostprocess.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\FacebookSettingsEditor.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\Utility.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\android\FacebookAndroidUtil.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\android\ManifestMod.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\iOS\FixupFiles.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\iOS\PListDict.cs" />
+     <Compile Include="Assets\FacebookSDK\SDK\Editor\iOS\PListParser.cs" />
      <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Editor\ImageEffects\AntialiasingEditor.cs" />
      <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Editor\ImageEffects\BloomAndFlaresEditor.cs" />
      <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Editor\ImageEffects\BloomEditor.cs" />
@@ -64,6 +74,7 @@
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
+     <None Include="Assets\FacebookSDK\SDK\Editor\android\DefaultAndroidManifest.xml" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
      <None Include="Assets\Shaders\CelSurfaceShaderTerrain.shader" />
@@ -92,6 +103,7 @@
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset3.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
      <None Include="Assets\Unity Assets\ENTIGI\Readme.txt" />
+     <None Include="Assets\Unity Assets\Monster Sounds - Engebretsen musikk\readme.txt" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />
@@ -137,6 +149,7 @@
      <None Include="Assets\Shaders\CelSurfaceShader.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAA2.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrection3DLut.shader" />
+     <None Include="Assets\FacebookSDK\SDK\Scripts\Canvas\Resources\JSSDKBindings.txt" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\LensFlareCreate.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\EdgeDetectNormals.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\PrepareSunShaftsBlur.shader" />
