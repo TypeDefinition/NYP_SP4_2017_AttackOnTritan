@@ -47,8 +47,9 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Building Phase\BuildingPhaseSystemScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\CameraMoveScript.cs" />
-     <Compile Include="Assets\Scripts\Building Phase\PostWaveScript.cs" />
+     <Compile Include="Assets\Scripts\Building Phase\PostStageScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\SelectedGridScript.cs" />
+     <Compile Include="Assets\Scripts\Building Phase\StartStageScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\TowerListToggleScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\TowerPrefabScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\TowerSelectPanelScript.cs" />
