@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{BEB06057-295F-A2D7-1C12-2993039C7468}</ProjectGuid>
+    <ProjectGuid>{3C01B659-B68C-9F69-C337-BD0E5447DBB4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -140,8 +140,9 @@
      <Compile Include="Assets\FacebookSDK\SDK\Scripts\Utils\Utilities.cs" />
      <Compile Include="Assets\Scripts\Building Phase\BuildingPhaseSystemScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\CameraMoveScript.cs" />
-     <Compile Include="Assets\Scripts\Building Phase\PostWaveScript.cs" />
+     <Compile Include="Assets\Scripts\Building Phase\PostStageScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\SelectedGridScript.cs" />
+     <Compile Include="Assets\Scripts\Building Phase\StartStageScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\TowerListToggleScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\TowerPrefabScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\TowerSelectPanelScript.cs" />

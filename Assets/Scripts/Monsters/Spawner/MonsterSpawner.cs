@@ -77,7 +77,7 @@ public class MonsterSpawner : MonoBehaviour {
 		}
 	}
 
-	public void GeneratePath() {
+	public bool GeneratePath() {
 		if (startGrid == null || endGrid == null) {
 			if (gridSystem.GetGrid(startID) != null) {
 				startGrid = gridSystem.GetGrid(startID).GetComponent<Grid>();
@@ -104,8 +104,13 @@ public class MonsterSpawner : MonoBehaviour {
 
 		if (gridSystem == null) {
 			print(gameObject.name + " has no Grid System."); //失败！/(T.T)\
+            return false;
 		} else {
 			path = gridSystem.Search(startID, endID); //成功！\(^.^)/
+            if (path == null) {
+                return false;
+            }
+            return true;
 		}
 	}
 
