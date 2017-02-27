@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Levels/Level_2.unity
+=======
+- path: Assets/Scenes/Jacob_test.unity
+>>>>>>> e5cd759b61060baccf9ceae21a7f66023cb61106
   isLoaded: 1
   isActive: 1
