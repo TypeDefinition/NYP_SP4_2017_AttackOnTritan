@@ -244,7 +244,6 @@ public class MonsterSpawner : MonoBehaviour {
 			stage.StopStage(); //停！
 		}
         ClearMonsters();
-        print("Clear");
 	}
 
 	//This seems... unoptimised. No noticable framerate decrease for now.

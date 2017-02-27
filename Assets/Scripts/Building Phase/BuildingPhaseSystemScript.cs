@@ -31,6 +31,7 @@ public class BuildingPhaseSystemScript : MonoBehaviour {
         amountToBuildTowers = startGameCurrency;
         if (selectingGrid == null)
         {
+            Debug.Log("Building phase system no selecting script");
             return;
         }
         if (towerPrefabs.Length <= 0)

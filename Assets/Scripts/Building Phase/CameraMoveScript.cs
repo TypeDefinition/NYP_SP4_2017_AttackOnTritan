@@ -41,7 +41,7 @@ public class CameraMoveScript : MonoBehaviour {
             !buildingPhasePrefab.gameObject.activeInHierarchy &&
             !buildingPhaseSystem.gameObject.activeInHierarchy)
         {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Dead Camera"))
+            if (animator.enabled == true && animator.GetCurrentAnimatorStateInfo(0).IsName("Dead Camera"))
             {
                 animator.enabled = false;
                 selectedGrid.gameObject.SetActive(true);

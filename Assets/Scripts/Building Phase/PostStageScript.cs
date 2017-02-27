@@ -13,6 +13,8 @@ public class PostStageScript : MonoBehaviour {
     private SelectedGridScript selectingGrid;
     [SerializeField]
     private MonsterSpawner[] spawners;
+    [SerializeField]
+    private GridSystem theGridSystem;
 
     // The give up on life way //
     [SerializeField]
@@ -42,8 +44,11 @@ public class PostStageScript : MonoBehaviour {
                 return;
             }
             if (spawners[i].HasActiveMonsters())
+            {
                 return;
+            }                
         }
+        print("Spawners Done.");
         BackToBuildingPhase();
         waveCount++;
         this.gameObject.SetActive(false);
@@ -52,16 +57,25 @@ public class PostStageScript : MonoBehaviour {
     public void BackToBuildingPhase()
     {
         if (!buildingPhaseSystem.gameObject.activeInHierarchy)
+        {
             buildingPhaseSystem.gameObject.SetActive(true);
+        }
         if (!buildingPhasePrefab.gameObject.activeInHierarchy)
+        {
             buildingPhasePrefab.gameObject.SetActive(true);
+        }
         if (!selectingGrid.gameObject.activeInHierarchy)
+        {
             selectingGrid.gameObject.SetActive(true);
+        }            
 
         buildingPhaseSystem.amountToBuildTowers += currency[waveCount];
         buildingPhaseSystem.numberOfBuildableWalls += walls[waveCount];
 
         buildingPhaseSystem.UpdateText();
         buildingPhaseSystem.selectingGrid.ChangeToOpenPhase();
+
+        theGridSystem.EnableGridCollider(true);
+        theGridSystem.RenderGrids(true);
     }
 }

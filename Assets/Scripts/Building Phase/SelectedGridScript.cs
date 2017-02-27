@@ -62,6 +62,7 @@ public class SelectedGridScript : MonoBehaviour
         }
         selectedGrid = theGridSystem.GetGrid(startSelectedGridID).GetComponent<Grid>();
         transform.position = theGridSystem.GetGrid(startSelectedGridID).transform.position;
+        theGridSystem.RenderGrids(true);
 
         showcaseGO = GameObject.Instantiate(selectedPrefab);
         showcaseGO.transform.SetParent(transform);
@@ -81,7 +82,7 @@ public class SelectedGridScript : MonoBehaviour
                 if (selectedGrid != hit.transform.GetComponent<Grid>())
                 {
                     selectedGrid = hit.transform.GetComponent<Grid>();
-                    transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, 0.2f, 0);
+                    transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, -0.05f, 0);
                     if (selectedPrefab != null)
                     {
                         ChangeTurretTranslateOnTower();
@@ -133,7 +134,7 @@ public class SelectedGridScript : MonoBehaviour
                     if (selectedGrid != hit.transform.GetComponent<Grid>())
                     {
                         selectedGrid = hit.transform.GetComponent<Grid>();
-                        transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, 0.2f, 0);
+                        transform.position = theGridSystem.GetGrid(selectedGrid.GetID()).transform.position + new Vector3(0, -0.05f, 0);
 
                         if (selectedGrid.wall == null && selectedGrid.tower == null)
                         {

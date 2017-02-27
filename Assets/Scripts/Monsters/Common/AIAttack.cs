@@ -3,6 +3,7 @@ using System.Collections;
 
 public class AIAttack : MonoBehaviour {
 	
+	[SerializeField]
 	protected bool attacking; //Are we currently attacking?
 
 	[SerializeField]
