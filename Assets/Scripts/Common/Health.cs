@@ -90,6 +90,10 @@ public class Health : MonoBehaviour {
 		return previousMaxHealth;
 	}
 
+	public bool IsFullHealth() {
+		return currentHealth == maxHealth;
+	}
+
 	public bool IsAlive() {
 		return currentHealth > 0;
 	}
