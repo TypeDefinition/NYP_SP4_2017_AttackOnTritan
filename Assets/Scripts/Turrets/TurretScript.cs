@@ -12,103 +12,54 @@ public class TurretScript : MonoBehaviour
         TOTAL_STYLES
     }
 
-    protected int towerLevel; //{ get; set; }
-    protected int minAttackDamage; //{ get; set; }
-    protected int maxAttackDamage; //{ get; set; }
-    protected float timer; //{ get; set; }
-    protected float attackSpeed; //{ get; set; }
-    protected float proximity; //{ get; set; }
-    protected ATTSTYLE attackStyle; //{ get; set; }
+    protected int towerLevel; 
+    public int maxTowerLevel;
+
+    public int minAttackDamage;          
+    protected int maxAttackDamage;          
+    protected float timer;                  
+    protected float attackSpeed;            
+    protected float proximity;              
+    protected ATTSTYLE attackStyle;         
     protected Quaternion originalRotation;
 
-    public int Level
+    public virtual int GetLevel()
     {
-        get
-        {
-            return towerLevel;
-        }
-        set
-        {
-            towerLevel = value;
-        }
+        return towerLevel; 
     }
-
-    public int MinAtt
+    public virtual int GetCost()
     {
-        get
-        {
-            return minAttackDamage;
-        }
-        set
-        {
-            minAttackDamage = value;
-        }
+        return 0;
     }
-
-    public int MaxAtt
+    public virtual int[] GetCostArray()
     {
-        get
-        {
-            return maxAttackDamage;
-        }
-        set
-        {
-            maxAttackDamage = value;
-        }
-    }
-
-    public float Timer
-    {
-        get
-        {
-            return timer;
-        }
-        set
-        {
-            timer = value;
-        }
-    }
-
-    public float AttSpd
-    {
-        get
-        {
-            return attackSpeed;
-        }
-        set
-        {
-            attackSpeed = value;
-        }
+        return null;
     }
 
     public float Proximity
     {
-        get
-        {
-            return proximity;
-        }
-        set
-        {
-            proximity = value;
-        }
+        get { return proximity; }
+        set {  proximity = value; }
     }
-
     public ATTSTYLE Style
     {
-        get
-        {
-            return attackStyle;
-        }
-        set
-        {
-            attackStyle = value;
-        }
+        get { return attackStyle; }
+        set { attackStyle = value; }
+    }
+    public int Level
+    {
+        set { towerLevel = value; }
+        get { return towerLevel; }
+    }
+    public int MaxLevel {
+        get { return maxTowerLevel; }
     }
 
     // Use this for initialization
     protected virtual void Start()
     {
         towerLevel = 1;
+        maxTowerLevel = 3;
         timer = 0;
         attackStyle = ATTSTYLE.NEAREST_FIRST;
         originalRotation = transform.rotation;
@@ -158,5 +109,10 @@ public class TurretScript : MonoBehaviour
         if (attackSpeed - attspd > 0)
             attackSpeed -= attspd;
         proximity += prox;
+    }
+
+    public virtual void LevelUp()
+    {
+
     }
 }

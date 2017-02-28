@@ -129,6 +129,10 @@ public class SelectedGridScript : MonoBehaviour
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    return;
+                }
                 if (hit.transform.GetComponent<Grid>() != null)
                 {
                     if (selectedGrid != hit.transform.GetComponent<Grid>())
@@ -171,6 +175,10 @@ public class SelectedGridScript : MonoBehaviour
             case PHASE_MODE.LIST_CLOSE:
                 ListCloseUpdate();
                 break;
+        }
+        if(Input.GetKey(KeyCode.L))
+        {
+            print(selectedGrid.tower.GetComponentInChildren<TurretScript>().Level);
         }
     }
     // Check functions
@@ -231,8 +239,7 @@ public class SelectedGridScript : MonoBehaviour
 
                 CapsuleCollider wallCollider = selectedGrid.wall.GetComponent<CapsuleCollider>();
                 selectedGrid.tower.transform.position = new Vector3(selectedGrid.wall.transform.position.x, (wallCollider.height + wallCollider.center.y) / 2, selectedGrid.wall.transform.position.z);
-
-                buildingPhaseSystem.amountToBuildTowers -= 1500;
+                buildingPhaseSystem.amountToBuildTowers -= selectedGrid.tower.GetComponentInChildren<TurretScript>().GetCost();
             }
         }
         // If we are selecting a wall
@@ -245,10 +252,13 @@ public class SelectedGridScript : MonoBehaviour
                 selectedGrid.wall.AddComponent<TurretTowerScript>();
                 selectedGrid.wall.GetComponent<TurretTowerScript>().tileID = selectedGrid.GetID();
                 selectedGrid.wall.GetComponent<TurretTowerScript>().gridSystem = theGridSystem;
+
+                selectedGrid.wall.AddComponent<Health>();
+                selectedGrid.wall.GetComponent<Health>().SetMaxHealth(50);
+                selectedGrid.wall.GetComponent<Health>().SetCurrentHealth(50);
                 selectedGrid.wall.transform.SetParent(selectedGrid.transform);
                 buildingPhaseSystem.numberOfBuildableWalls -= 1;
             }
-            // Else, remove!
             else
             {
                 isAbleToPlacePrefab = false;
@@ -299,7 +309,7 @@ public class SelectedGridScript : MonoBehaviour
     {
         if (selectedPrefab.CompareTag("Turret"))
         {
-            if (buildingPhaseSystem.amountToBuildTowers < 1500 /*selectedPrefab get cost whatsoever*/)
+            if (buildingPhaseSystem.amountToBuildTowers < selectedPrefab.GetComponentInChildren<TurretScript>().GetCost())
             {
                 hasResources = false;
             }
@@ -328,18 +338,14 @@ public class SelectedGridScript : MonoBehaviour
             buildingPhaseSystem.upgradeButton.gameObject.SetActive(false);
             return;
         }
-        else if (selectedGrid.tower.GetComponentInChildren<TurretScript>().Level > 2)
+        else if (selectedGrid.tower.GetComponentInChildren<TurretScript>().GetLevel() >= selectedGrid.tower.GetComponentInChildren<TurretScript>().MaxLevel ||
+            buildingPhaseSystem.amountToBuildTowers < selectedGrid.tower.GetComponentInChildren<TurretScript>().GetCost())
         {
             buildingPhaseSystem.upgradeButton.gameObject.SetActive(false);
         }
-        else if (buildingPhaseSystem.amountToBuildTowers < 1000)
+        else if (phaseMode == PHASE_MODE.LIST_CLOSE)
         {
-            buildingPhaseSystem.upgradeButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            if (phaseMode == PHASE_MODE.LIST_CLOSE)
-                buildingPhaseSystem.upgradeButton.gameObject.SetActive(true);
+            buildingPhaseSystem.upgradeButton.gameObject.SetActive(true);
         }
     }
 
@@ -376,7 +382,11 @@ public class SelectedGridScript : MonoBehaviour
         if (selectedGrid.tower == null)
             return 0;
 
-        int cost = 1500;
+        int cost = 0;
+        for(int i = 0; i < selectedGrid.tower.GetComponentInChildren<TurretScript>().GetLevel(); ++i){
+            cost += selectedGrid.tower.GetComponentInChildren<TurretScript>().GetCostArray()[i];
+        }
+        cost = (int)(cost * 3 / 4);
         Destroy(selectedGrid.tower);
         buildingPhaseSystem.SelectedWallButton();
         return cost;
@@ -391,8 +401,10 @@ public class SelectedGridScript : MonoBehaviour
     }
     public int UpgradeSelectedTurret()
     {
-       selectedGrid.tower.GetComponentInChildren<TurretScript>().Level += 1;
-       return 2000;
+       int cost = selectedGrid.tower.GetComponentInChildren<TurretScript>().GetCost();
+       print(cost);
+       selectedGrid.tower.GetComponentInChildren<TurretScript>().LevelUp();
+       return cost;
     }
 }
  
