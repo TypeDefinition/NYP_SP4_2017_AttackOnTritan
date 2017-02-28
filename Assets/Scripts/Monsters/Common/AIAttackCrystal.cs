@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class AIAttackCrystal : AIAttack {
 
 	public GameObject tritanCrystal;
+	private int tritanCrystalLayerMask;
 	private bool touchingCrystal;
 	private AIMovement aiMovement;
 
@@ -22,9 +23,12 @@ public class AIAttackCrystal : AIAttack {
 	private float stuckTime; //If we can't mvoe for too long, we're stuck.
 	private float stuckCountdownTimer;
 
+	bool isBoss;
+
 	// Use this for initialization
 	void Start () {
 		InitValues();
+		tritanCrystalLayerMask  = LayerMask.GetMask("Tritan Crystal");
 		touchingCrystal = false;
 		aiMovement = gameObject.GetComponent<AIMovement>();
 
@@ -60,6 +64,10 @@ public class AIAttackCrystal : AIAttack {
 		}	
 	}
 
+	void OnDisable() {
+		attacking = false;
+	}
+
 	void OnCollisionEnter(Collision _collisionInfo) {
 		if (_collisionInfo.gameObject == tritanCrystal) {
 			touchingCrystal = true; //We're already touching the crystal. No need to move towards to anymore.
@@ -78,6 +86,7 @@ public class AIAttackCrystal : AIAttack {
 		}
 		waypoints.Clear();
 
+
 		int numWaypoints = Random.Range(12, 18); //Random it to have even lesser crowding.
 		float angle = 360.0f / (float)numWaypoints;
 		if (Mathf.Abs(waypointsRadius) < 2.0f) {
@@ -93,7 +102,7 @@ public class AIAttackCrystal : AIAttack {
 
 		reachedEndWaypoint = false;
 		currentWaypointIndex = -1;
-		targetWaypointIndex  = Random.Range(0, waypoints.Count);
+		targetWaypointIndex = Random.Range(0, waypoints.Count);
 	}
 
 	private void MoveTowardsCrystal() {
@@ -122,6 +131,10 @@ public class AIAttackCrystal : AIAttack {
 		}
 		Vector3 directionToCrystal = destination - gameObject.transform.position;
 		directionToCrystal.y = 0.0f; //Disregard the height difference.
+
+		aiMovement.RotateTowards(directionToCrystal); //Face the crystal.
+		aiMovement.Move(directionToCrystal);
+
 		//Once we reach a waypoint, move on to the next one.
 		if (directionToCrystal.sqrMagnitude < 0.3f * 0.3f) {
 			//We've already reached the last waypoint. Walk directly to the crystal.
@@ -131,9 +144,6 @@ public class AIAttackCrystal : AIAttack {
 				currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Count;
 			}
 		}
-
-		aiMovement.RotateTowards(directionToCrystal); //Face the crystal.
-		aiMovement.Move(directionToCrystal);
 
 		if (stuckCountdownTimer <= 0.0f) {
 			print("Stuck");
@@ -150,12 +160,12 @@ public class AIAttackCrystal : AIAttack {
 	//Returns if we've manage to attack anything.
 	public override bool Attack() {
 		bool result = false;
-		Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+		Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange, tritanCrystalLayerMask);
 		for (int i = 0; i < hitColliders.Length; ++i) {
 			//If it's not a Tritan Crystal, don't hurt it.
-			if (hitColliders[i].gameObject.CompareTag("Tritan Crystal") == false) {				
+			/*if (hitColliders[i].gameObject.CompareTag("Tritan Crystal") == false) {
 				continue;
-			}
+			}*/
 			//If it's not facing us, also don't hurt it.
 			if (Vector3.Dot(gameObject.GetComponent<Transform>().forward, hitColliders[i].gameObject.GetComponent<Transform>().position - gameObject.transform.position) < 0.0f) {
 				continue;

@@ -10,13 +10,13 @@ public class AIFollowPath : MonoBehaviour {
 
 	public List<GridID> path; //Path
 	[SerializeField]
-	private int pathIndex; //Where are we along the path.    
-	private float reachedDistance; //How close must we be to the grid to have considered reaching it.
+	protected int pathIndex; //Where are we along the path.    
+	protected float reachedDistance; //How close must we be to the grid to have considered reaching it.
 
-	private GameObject currentGrid; //The grid we are going towards.
-	private GameObject nextGrid; //The next grid to head to.
+	protected GameObject currentGrid; //The grid we are going towards.
+	protected GameObject nextGrid; //The next grid to head to.
 
-	AIMovement aiMovement;
+	protected AIMovement aiMovement;
 
 	// This is called before Start().
 	void Awake() {
