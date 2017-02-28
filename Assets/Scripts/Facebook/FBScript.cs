@@ -123,4 +123,9 @@ public class FBScript : MonoBehaviour {
     {
         FBManager.manager.ShareWithUsers();
     }
+    public void logout()
+    {
+        FBManager.manager.PlayerLogout();
+        FBMenus(FB.IsLoggedIn);
+    }
 }

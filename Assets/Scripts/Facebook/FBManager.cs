@@ -107,7 +107,7 @@ public class FBManager : MonoBehaviour {
         }
         else
         {
-            AppLinkURL = "https://www.youtube.com/watch?v=M94VA4cSTuc";
+            AppLinkURL = "https://www.google.com.sg/";
         }
     }
 
@@ -118,7 +118,7 @@ public class FBManager : MonoBehaviour {
             "Attack on Tritan",
             "Caption",
             "Check out this game",
-            new Uri("https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-9/16729160_264888460614935_7431147129923963256_n.jpg?oh=8059d35a943a82ca11a40889cbe84de4&oe=59295E33"),
+            new Uri("https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"),
             string.Empty,
             ShareCallback
             );
@@ -144,7 +144,7 @@ public class FBManager : MonoBehaviour {
     {
         FB.Mobile.AppInvite(
             new Uri(AppLinkURL),
-            new Uri("https://scontent-sit4-1.xx.fbcdn.net/v/t1.0-9/16729160_264888460614935_7431147129923963256_n.jpg?oh=8059d35a943a82ca11a40889cbe84de4&oe=59295E33"),
+            new Uri("https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"),
             InviteCallback
             );
     }
@@ -191,5 +191,11 @@ public class FBManager : MonoBehaviour {
         {
             Debug.Log("Successfully Mentally Challenged");
         }
+    }
+
+    public void PlayerLogout()
+    {
+        FB.LogOut();
+        isloggedin = false;
     }
 }

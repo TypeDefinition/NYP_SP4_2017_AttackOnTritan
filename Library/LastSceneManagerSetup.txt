@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Levels/Level_1.unity
+- path: Assets/Scenes/Jacob_test.unity
   isLoaded: 1
   isActive: 1
