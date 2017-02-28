@@ -90,6 +90,7 @@ public class AIBehaviour : MonoBehaviour {
 		gameObject.GetComponent<AIDeath>().Reset();
 		gameObject.GetComponent<AIAnimation>().Reset();
 		gameObject.GetComponent<AIAnimation>().enabled = true;
+		gameObject.GetComponent<AIAttackCrystal>().Reset();
 	}
 
 }

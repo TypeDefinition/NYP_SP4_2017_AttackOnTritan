@@ -34,3 +34,9 @@ public enum MONSTER_TYPE {
 
 	NUM_MONSTER_TYPE,
 }
+
+public enum BOSS_TYPE {
+	BOSS_RABBIT,
+
+	NUM_BOSS_TYPE,
+}

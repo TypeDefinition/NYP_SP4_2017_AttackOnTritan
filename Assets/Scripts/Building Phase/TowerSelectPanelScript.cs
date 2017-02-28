@@ -53,7 +53,11 @@ public class TowerSelectPanelScript : MonoBehaviour {
             }
             else
             {
-                towerGOScript.towerCost = 1000 + i;
+                TurretScript turret = towerPrefabs[i].GetComponentInChildren<TurretScript>();
+                if(turret)
+                {
+                    towerGOScript.towerCost = turret.GetCost();
+                }
                 towerGOScript.costImage = sprites[1];
             }
             Transform parentTransform = gameObject.transform.parent;

@@ -7,6 +7,9 @@ public class AcidTurretScript : TurretScript {
     private Vector3 direction;
     private float rotateSpd;
 
+    [SerializeField]
+    private int[] towerCost;
+
     // Use this for initialization
     protected override void Start()
     {
@@ -15,7 +18,7 @@ public class AcidTurretScript : TurretScript {
         minAttackDamage = 10;
         maxAttackDamage = 15;
         attackSpeed = 0.5f;
-        proximity = 10f;
+        proximity = 6f;
         direction = new Vector3(0, 0, 0);
         rotateSpd = 3f;
         attackStyle = ATTSTYLE.FURTHEST_FIRST;
@@ -29,6 +32,11 @@ public class AcidTurretScript : TurretScript {
             // Gets Vector3 direction from traget
             direction = target.transform.position - transform.position;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction.normalized), Time.deltaTime * rotateSpd);
+            Health mobHealth = target.transform.GetComponent<Health>();
+            if (mobHealth.GetCurrentHealth() <= 0)
+            {
+                target = null;
+            }
         }
         else
         {
@@ -55,7 +63,11 @@ public class AcidTurretScript : TurretScript {
                         if ((transform.position - enemy.transform.position).magnitude < nearestDistance)
                         {
                             nearestDistance = (enemy.transform.position - transform.position).magnitude;
-                            target = enemy.transform.gameObject;
+                            Health mobHealth = enemy.transform.GetComponent<Health>();
+                            if (mobHealth.GetCurrentHealth() > 0)
+                            {
+                                target = enemy.transform.gameObject;
+                            }
                         }
                     }
                     break;
@@ -69,7 +81,11 @@ public class AcidTurretScript : TurretScript {
                         if ((transform.position - enemy.transform.position).magnitude >= longestDistance)
                         {
                             longestDistance = (enemy.transform.position - transform.position).magnitude;
-                            target = enemy.transform.gameObject;
+                            Health mobHealth = enemy.transform.GetComponent<Health>();
+                            if (mobHealth.GetCurrentHealth() > 0)
+                            {
+                                target = enemy.transform.gameObject;
+                            }
                         }
                     }
                     break;
@@ -81,31 +97,49 @@ public class AcidTurretScript : TurretScript {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direction, out hit, proximity))
         {
-            Debug.Log(hit.transform.gameObject.name);
+            Health mobHealth = hit.transform.GetComponent<Health>();
+            if (mobHealth != null)
+            {
+                mobHealth.DecreaseHealth(Random.Range(minAttackDamage, maxAttackDamage));
+            }
         }
     }
 
-    public void LevelUp()
+    public override void LevelUp()
     {
-        if (towerLevel == 1)
+        towerLevel += 1;
+        if (towerLevel == 2)
         {
             GameObject turretbase = Resources.Load("Turrets/Acid/Base 1") as GameObject;
-            transform.GetChild(0).GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
+            transform.parent.GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
             GameObject turretbarrel = Resources.Load("Turrets/Acid/Turret 1") as GameObject;
-            transform.GetChild(0).GetChild(0).GetComponent<MeshFilter>().mesh = turretbarrel.GetComponent<MeshFilter>().sharedMesh;
+            transform.GetComponent<MeshFilter>().mesh = turretbarrel.GetComponent<MeshFilter>().sharedMesh;
             GameObject barrel = Resources.Load("Turrets/Acid/Barrel 1") as GameObject;
-            transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<MeshFilter>().mesh = turretbarrel.GetComponent<MeshFilter>().sharedMesh;
+            transform.GetChild(0).GetComponent<MeshFilter>().mesh = barrel.GetComponent<MeshFilter>().sharedMesh;
         }
-        else if (towerLevel == 2)
+        else if (towerLevel == 3)
         {
             GameObject turretbase = Resources.Load("Turrets/Acid/Base 2") as GameObject;
-            transform.GetChild(0).GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
+            transform.parent.GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
             GameObject turretbarrel = Resources.Load("Turrets/Acid/Turret 2") as GameObject;
-            transform.GetChild(0).GetChild(0).GetComponent<MeshFilter>().mesh = turretbarrel.GetComponent<MeshFilter>().sharedMesh;
+            transform.GetComponent<MeshFilter>().mesh = turretbarrel.GetComponent<MeshFilter>().sharedMesh;
             GameObject barrel = Resources.Load("Turrets/Acid/Barrel 2") as GameObject;
-            transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<MeshFilter>().mesh = turretbarrel.GetComponent<MeshFilter>().sharedMesh;
+            transform.GetChild(0).GetComponent<MeshFilter>().mesh = barrel.GetComponent<MeshFilter>().sharedMesh;
         }
         LevelUpgrades(1, 2, 0.05f, 0.5f);
-        towerLevel += 1;
+        print(minAttackDamage + "," + maxAttackDamage);
+    }
+
+    public override int GetCost()
+    {
+        return towerCost[towerLevel]; 
+    }
+    public override int GetLevel()
+    {
+        return towerLevel;
+    }
+    public override int[] GetCostArray()
+    {
+        return towerCost;
     }
 }

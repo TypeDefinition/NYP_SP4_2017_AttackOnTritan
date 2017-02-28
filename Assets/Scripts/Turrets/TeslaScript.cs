@@ -9,6 +9,9 @@ public class TeslaScript : TurretScript {
     private GameObject lightning;
     private GameObject lightning2;
 
+    [SerializeField]
+    private int[] towerCost;
+
     // Use this for initialization
     protected override void Start()
     {
@@ -17,7 +20,7 @@ public class TeslaScript : TurretScript {
         minAttackDamage = 5;
         maxAttackDamage = 8;
         attackSpeed = 0.25f;
-        proximity = 4f;
+        proximity = 6f;
         direction = new Vector3(0, 0, 0);
         lightning = transform.GetChild(0).gameObject;
         lightning2 = transform.GetChild(1).gameObject;
@@ -37,6 +40,11 @@ public class TeslaScript : TurretScript {
             direction = target.transform.position - transform.position;
             transform.rotation = Quaternion.LookRotation(direction.normalized);
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, direction.magnitude * 0.28f);
+            Health mobHealth = target.transform.GetComponent<Health>();
+            if (mobHealth.GetCurrentHealth() <= 0)
+            {
+                target = null;
+            }
         }
         else
         {
@@ -66,7 +74,11 @@ public class TeslaScript : TurretScript {
                         if ((transform.position - enemy.transform.position).magnitude < nearestDistance)
                         {
                             nearestDistance = (enemy.transform.position - transform.position).magnitude;
-                            target = enemy.transform.gameObject;
+                            Health mobHealth = enemy.transform.GetComponent<Health>();
+                            if(mobHealth.GetCurrentHealth() > 0)
+                            {
+                                target = enemy.transform.gameObject;
+                            }
                         }
                     }
                     break;
@@ -80,34 +92,54 @@ public class TeslaScript : TurretScript {
                         if ((transform.position - enemy.transform.position).magnitude >= longestDistance)
                         {
                             longestDistance = (enemy.transform.position - transform.position).magnitude;
-                            target = enemy.transform.gameObject;
+                            Health mobHealth = enemy.transform.GetComponent<Health>();
+                            if (mobHealth.GetCurrentHealth() > 0)
+                            {
+                                target = enemy.transform.gameObject;
+                            }
                         }
                     }
                     break;
                 }
         }
-
-        //Debug.DrawRay(transform.position, direction, new Color(1, 0, 1), 10);
-
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direction, out hit, proximity))
         {
-           
+            Health mobHealth = hit.transform.GetComponent<Health>();
+            if (mobHealth != null)
+            {
+                mobHealth.DecreaseHealth(Random.Range(minAttackDamage, maxAttackDamage));
+            }
         }
     }
 
-    public void LevelUp()
+    public override void LevelUp()
     {
-        if (towerLevel == 1)
+        towerLevel += 1;
+        if (towerLevel == 2)
         {
-            GameObject turretbase = Resources.Load("Turrets/Tesla/Telsa 1") as GameObject;
-            transform.GetChild(0).GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
+            GameObject turretbase = Resources.Load("Turrets/Tesla/Tesla 1") as GameObject;
+            print(transform.parent.parent.name);
+            transform.parent.parent.GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
         }
-        else if (towerLevel == 2)
+        else if (towerLevel == 3)
         {
-            GameObject turretbase = Resources.Load("Turrets/Tesla/Telsa 2") as GameObject;
-            transform.GetChild(0).GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
+            GameObject turretbase = Resources.Load("Turrets/Tesla/Tesla 2") as GameObject;
+            transform.parent.parent.GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
         }
-        LevelUpgrades(1, 2, 0.05f, 0.5f);
+        LevelUpgrades(3, 7, 0.08f, 0.2f);
+    }
+
+    public override int GetCost()
+    {
+        return towerCost[towerLevel];
+    }
+    public override int GetLevel()
+    {
+        return towerLevel;
+    }
+    public override int[] GetCostArray()
+    {
+        return towerCost;
     }
 }
