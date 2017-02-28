@@ -3,12 +3,19 @@ using System.Collections;
 
 public class MonsterSpawnerWave : MonoBehaviour {
 
+	public enum SPAWN_MODE {
+		MONSTER,
+		BOSS,
+	}
+
 	private MonsterSpawner monsterSpawner; //The spawner that is going to spawn our monster and handle the other stuff for us.
 
 	public MonsterSpawnerWave triggerWave; //This wave starts after triggerWave is done.
 	public float triggerTime; //Either number of seconds after triggeWave is done or after game starts.
 	private float triggerCountdownTimer;
 
+	public SPAWN_MODE spawnMode;
+	public BOSS_TYPE bossType;
 	public MONSTER_TYPE monsterType; //What is the monster we are spawning?
 	public uint numMonsters; //How many monster to spawn?
 	private uint count; //How many monsters have we spawned so far?
@@ -53,7 +60,11 @@ public class MonsterSpawnerWave : MonoBehaviour {
 				if (spawnCountdownTimer > 0.0f) {
 					spawnCountdownTimer -= Time.deltaTime;
 				} else {
-					SpawnMonster();
+					if (spawnMode == SPAWN_MODE.MONSTER) {
+						SpawnMonster();
+					} else {
+						SpawnBoss();
+					}
 					++count;
 					spawnCountdownTimer = spawnInterval;
 				}
@@ -66,6 +77,14 @@ public class MonsterSpawnerWave : MonoBehaviour {
 			//print("Spawned Monster");
 		} else {
 			print("Failed to spawn monster.");
+		}
+	}
+
+	private void SpawnBoss() {
+		if (monsterSpawner.SpawnBoss(bossType)) {
+			//print("Spawned Monster");
+		} else {
+			print("Failed to spawn boss.");
 		}
 	}
 

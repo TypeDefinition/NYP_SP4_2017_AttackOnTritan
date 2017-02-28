@@ -244,7 +244,8 @@ public class GridSystem : MonoBehaviour
 	}
 
 	// Pathfinding search function from start to end
-	public List<GridID> Search(GridID _startID, GridID _endID)
+	// _ignoreWalls only ignores walls along the way. The start and end must still be clear.
+	public List<GridID> Search(GridID _startID, GridID _endID, bool _ignoreWalls = false)
 	{
 		if (GetGrid (_startID) == null || GetGrid(_endID) == null) //Check if the path is even remotely possible.
 		{
@@ -288,7 +289,7 @@ public class GridSystem : MonoBehaviour
 					continue;
 				}
 
-				if (GetGrid (neighbourID).GetComponent<Grid> ().wall != null) //The neighbour has a wall. No go.
+				if (!_ignoreWalls && GetGrid(neighbourID).GetComponent<Grid> ().wall != null) //The neighbour has a wall. No go.
 				{
 					continue;
 				}

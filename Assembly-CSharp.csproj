@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{3C01B659-B68C-9F69-C337-BD0E5447DBB4}</ProjectGuid>
+    <ProjectGuid>{BEB06057-295F-A2D7-1C12-2993039C7468}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -146,8 +146,10 @@
      <Compile Include="Assets\Scripts\Building Phase\TowerListToggleScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\TowerPrefabScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\TowerSelectPanelScript.cs" />
+     <Compile Include="Assets\Scripts\Common\AxisAlignedBillboard.cs" />
      <Compile Include="Assets\Scripts\Common\Billboard.cs" />
      <Compile Include="Assets\Scripts\Common\Health.cs" />
+     <Compile Include="Assets\Scripts\Common\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Facebook\FBManager.cs" />
      <Compile Include="Assets\Scripts\Facebook\FBScript.cs" />
      <Compile Include="Assets\Scripts\Grid\Grid.cs" />
@@ -161,12 +163,16 @@
      <Compile Include="Assets\Scripts\MainMenu\MainMenuRotate.cs" />
      <Compile Include="Assets\Scripts\MainMenu\Menu.cs" />
      <Compile Include="Assets\Scripts\MainMenu\Pause.cs" />
+     <Compile Include="Assets\Scripts\Monsters\Boss Rabbit\BossRabbitAnimation.cs" />
      <Compile Include="Assets\Scripts\Monsters\Common\AIAnimation.cs" />
      <Compile Include="Assets\Scripts\Monsters\Common\AIAttack.cs" />
      <Compile Include="Assets\Scripts\Monsters\Common\AIAttackCrystal.cs" />
+     <Compile Include="Assets\Scripts\Monsters\Common\AIAttackWall.cs" />
      <Compile Include="Assets\Scripts\Monsters\Common\AIBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Monsters\Common\AIBehaviour_Boss.cs" />
      <Compile Include="Assets\Scripts\Monsters\Common\AIDeath.cs" />
      <Compile Include="Assets\Scripts\Monsters\Common\AIFollowPath.cs" />
+     <Compile Include="Assets\Scripts\Monsters\Common\AIFollowPath_Boss.cs" />
      <Compile Include="Assets\Scripts\Monsters\Common\AIMovement.cs" />
      <Compile Include="Assets\Scripts\Monsters\Common\MonsterType.cs" />
      <Compile Include="Assets\Scripts\Monsters\Spawner\MonsterSpawner.cs" />
@@ -235,6 +241,7 @@
      <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Environment\Water\Water\Scripts\Water.cs" />
      <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Environment\Water\Water\Scripts\WaterBase.cs" />
      <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
+     <Compile Include="Assets\Unity Assets\Monster-Rabbit\Scripts\MR_ctrl.cs" />
      <Compile Include="Assets\Unity Assets\Nebula Skyboxes\Scripts\MouseLook.cs" />
      <Compile Include="Assets\Unity Assets\Nebula Skyboxes\Scripts\SmoothCameraOrbit.cs" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
@@ -287,6 +294,7 @@
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Luminance.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
+     <None Include="Assets\Unity Assets\Monster-Rabbit\readme.txt" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionSelective.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\Bokeh34.shader" />
      <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlurDX11.shader" />

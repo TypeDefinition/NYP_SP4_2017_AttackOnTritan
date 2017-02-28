@@ -1,10 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Shaders\CelSurfaceShaderTerrain.shader">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Monsters\Common\AIAttackWall.cs">
     <Files>
-      <File FileName="Assets\Shaders\CelSurfaceShader.shader" Line="76" Column="4" />
-      <File FileName="Assets\Shaders\CelSurfaceShaderLeaves.shader" Line="10" Column="53" />
-      <File FileName="Assets\Shaders\CelSurfaceShaderTerrain.shader" Line="14" Column="3" />
+      <File FileName="Assets\Scripts\Monsters\Boss Rabbit\BossRabbitAnimation.cs" Line="21" Column="1" />
+      <File FileName="Assets\Scripts\Monsters\Boss Golem\BossGolemAnimation.cs" Line="39" Column="31" />
+      <File FileName="Assets\Scripts\Monsters\Common\AIBehaviour_Boss.cs" Line="98" Column="4" />
+      <File FileName="Assets\Scripts\Monsters\Common\MonsterType.cs" Line="39" Column="13" />
+      <File FileName="Assets\Scripts\Monsters\Common\AIFollowPath_Boss.cs" Line="4" Column="37" />
+      <File FileName="Assets\Scripts\Monsters\Common\AIFollowPath.cs" Line="62" Column="3" />
+      <File FileName="Assets\Scripts\Monsters\Common\AIAttackCrystal.cs" Line="95" Column="3" />
+      <File FileName="Assets\Scripts\Monsters\Common\AIAttackWall.cs" Line="61" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

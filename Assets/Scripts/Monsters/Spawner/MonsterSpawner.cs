@@ -30,12 +30,17 @@ public class MonsterSpawner : MonoBehaviour {
 
 	[SerializeField]
 	private List<GridID> path;
+	[SerializeField]
+	private List<GridID> shortestPath;
 
 	[SerializeField]
 	private GameObject[] monsterPrefabs = new GameObject[(uint)MONSTER_TYPE.NUM_MONSTER_TYPE]; //Do not change the size!
 	private List<GameObject>[] monsterPool;
 	private int[] monsterPoolIndex; //Our last searched index;
-	
+
+	[SerializeField]
+	private GameObject[] bossPrefabs = new GameObject[(uint)BOSS_TYPE.NUM_BOSS_TYPE];
+
     // Use this for like, initialization even before initialization. Initializationception!
 	void Awake() {
 		GeneratePath();
@@ -75,6 +80,10 @@ public class MonsterSpawner : MonoBehaviour {
 		if (monsterPrefabs.Length != (uint)MONSTER_TYPE.NUM_MONSTER_TYPE) {
 			monsterPrefabs = new GameObject[(uint)MONSTER_TYPE.NUM_MONSTER_TYPE];
 		}
+
+		if (bossPrefabs.Length != (uint)BOSS_TYPE.NUM_BOSS_TYPE) {
+			bossPrefabs = new GameObject[(uint)BOSS_TYPE.NUM_BOSS_TYPE];
+		}
 	}
 
 	public bool GeneratePath() {
@@ -107,7 +116,8 @@ public class MonsterSpawner : MonoBehaviour {
             return false;
 		} else {
 			path = gridSystem.Search(startID, endID); //成功！\(^.^)/
-            if (path == null) {
+			shortestPath = gridSystem.Search(startID, endID, true);
+            if (path == null || shortestPath == null) {
                 return false;
             }
             return true;
@@ -137,6 +147,31 @@ public class MonsterSpawner : MonoBehaviour {
 			return true;
 		} else {
 			print("Cannot spawn monster without a path!");
+			return false;
+		}
+	}
+
+	public bool SpawnBoss(BOSS_TYPE _bossType) {
+		if (_bossType == BOSS_TYPE.NUM_BOSS_TYPE) {
+			print(gameObject.name + " cannot spawn boss as boss type is invalid.");
+			return false;
+		} else if (bossPrefabs[(uint)_bossType] == null) {
+			print(gameObject.name + " cannot spawn boss as boss type prefab is null.");
+			return false;
+		} else if (bossPrefabs[(uint)_bossType].GetComponent<AIFollowPath>() == null) {
+			print(gameObject.name + " cannot spawn a boss without AIFollowPath Component!");
+			return false;
+		}
+
+		if (path != null && path.Count > 0) { //Place the monster at the start of the path.			
+			GameObject monster = GameObject.Instantiate(bossPrefabs[(uint)_bossType]);
+			monster.GetComponent<AIFollowPath_Boss>().gridSystem = gridSystem;
+			monster.GetComponent<AIFollowPath_Boss>().path = shortestPath;
+			monster.GetComponent<AIAttackCrystal>().tritanCrystal = endGrid.tritanCrystal;
+			monster.GetComponent<Transform>().position = gridSystem.GetGrid(path[0]).GetComponent<Transform>().position + new Vector3(0, 0.2f, 0);
+			return true;
+		} else {
+			print("Cannot spawn boss without a path!");
 			return false;
 		}
 	}
