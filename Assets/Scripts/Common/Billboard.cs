@@ -36,10 +36,11 @@ public class Billboard : MonoBehaviour {
 		//When billboarding, the object need to have the same rotation as the camera, rather than just looking at the camera.
 		//What I don't understand is why we are taking the camera's rotation and not the reverse of it.
 		//If we want to face towards the camera, don't we need to face the opposite of where the camera is pointing?
+		//Alright, apparently this is cause Unity's Quad faces the wrong way.
 		if (reverseDirection) {
-			targetPosition = gameObject.transform.position + camera.transform.rotation * Vector3.back;
+			targetPosition = gameObject.transform.position - (camera.transform.rotation * Vector3.back);
 		} else {
-			targetPosition = gameObject.transform.position + camera.transform.rotation * Vector3.forward;
+			targetPosition = gameObject.transform.position - (camera.transform.rotation * Vector3.forward);
 		}
 
 		//Rotate our up axis by the quaternion.

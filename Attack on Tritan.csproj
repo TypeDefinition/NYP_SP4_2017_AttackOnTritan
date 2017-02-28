@@ -164,8 +164,10 @@
     <Compile Include="Assets\Scripts\Building Phase\TowerListToggleScript.cs" />
     <Compile Include="Assets\Scripts\Building Phase\TowerPrefabScript.cs" />
     <Compile Include="Assets\Scripts\Building Phase\TowerSelectPanelScript.cs" />
+    <Compile Include="Assets\Scripts\Common\AxisAlignedBillboard.cs" />
     <Compile Include="Assets\Scripts\Common\Billboard.cs" />
     <Compile Include="Assets\Scripts\Common\Health.cs" />
+    <Compile Include="Assets\Scripts\Common\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Facebook\FBManager.cs" />
     <Compile Include="Assets\Scripts\Facebook\FBScript.cs" />
     <Compile Include="Assets\Scripts\Grid\Grid.cs" />
@@ -179,12 +181,16 @@
     <Compile Include="Assets\Scripts\MainMenu\MainMenuRotate.cs" />
     <Compile Include="Assets\Scripts\MainMenu\Menu.cs" />
     <Compile Include="Assets\Scripts\MainMenu\Pause.cs" />
+    <Compile Include="Assets\Scripts\Monsters\Boss Rabbit\BossRabbitAnimation.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIAnimation.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIAttack.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIAttackCrystal.cs" />
+    <Compile Include="Assets\Scripts\Monsters\Common\AIAttackWall.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Monsters\Common\AIBehaviour_Boss.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIDeath.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIFollowPath.cs" />
+    <Compile Include="Assets\Scripts\Monsters\Common\AIFollowPath_Boss.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIMovement.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\MonsterType.cs" />
     <Compile Include="Assets\Scripts\Monsters\Spawner\MonsterSpawner.cs" />
@@ -206,6 +212,8 @@
     <Compile Include="Assets\Scripts\Turrets\TestScript.cs" />
     <Compile Include="Assets\Scripts\Turrets\TurretScript.cs" />
     <Compile Include="Assets\Scripts\Turrets\TurretTowerScript.cs" />
+    <Compile Include="Assets\Sound\ButtonSounds.cs" />
+    <Compile Include="Assets\Sound\MixLevels.cs" />
     <Compile Include="Assets\Unity Assets\ENTIGI\FantasyMonsterPack\Scripts\Controller.cs" />
     <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Scripts\Antialiasing.cs" />
     <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Scripts\Bloom.cs" />
@@ -254,6 +262,7 @@
     <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Environment\Water\Water\Scripts\Water.cs" />
     <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Environment\Water\Water\Scripts\WaterBase.cs" />
     <Compile Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
+    <Compile Include="Assets\Unity Assets\Monster-Rabbit\Scripts\MR_ctrl.cs" />
     <Compile Include="Assets\Unity Assets\Nebula Skyboxes\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Unity Assets\Nebula Skyboxes\Scripts\SmoothCameraOrbit.cs" />
   </ItemGroup>
@@ -350,6 +359,7 @@
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\info snow assets.txt" />
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\info.txt" />
     <None Include="Assets\Unity Assets\Monster Sounds - Engebretsen musikk\readme.txt" />
+    <None Include="Assets\Unity Assets\Monster-Rabbit\readme.txt" />
     <None Include="Assets\Unity Assets\Nebula Skyboxes\Nebula Skyboxes - Readme.txt" />
     <None Include="Assets\Unity Assets\Skybox Pack1\read me.txt" />
   </ItemGroup>

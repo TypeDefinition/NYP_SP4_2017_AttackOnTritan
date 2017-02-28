@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Plugins.meta
 guid: d1e6831765bad9443bff1986ba457fc1
 folderAsset: yes
 timeCreated: 1488209705
+=======
+guid: 39a245c85c6720241aa1c6903b153577
+folderAsset: yes
+timeCreated: 1488207090
+>>>>>>> af8b7b675a03b949fc6d5730a6597e75df67a15f:Assets/Materials/Monsters.meta
 licenseType: Free
 DefaultImporter:
   userData: 

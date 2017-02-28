@@ -222,6 +222,7 @@
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\info snow assets.txt" />
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\info.txt" />
     <None Include="Assets\Unity Assets\Monster Sounds - Engebretsen musikk\readme.txt" />
+    <None Include="Assets\Unity Assets\Monster-Rabbit\readme.txt" />
     <None Include="Assets\Unity Assets\Nebula Skyboxes\Nebula Skyboxes - Readme.txt" />
     <None Include="Assets\Unity Assets\Skybox Pack1\read me.txt" />
   </ItemGroup>
