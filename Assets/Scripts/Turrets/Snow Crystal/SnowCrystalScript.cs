@@ -14,6 +14,9 @@ public class SnowCrystalScript : TurretScript
     private float Sloweffect;
     private float Snowradius;
 
+    [SerializeField]
+    private int[] towerCost;
+
     // Use this for initialization
     protected override void Start()
     {
@@ -105,16 +108,17 @@ public class SnowCrystalScript : TurretScript
         }
     }
 
-    public void LevelUp()
+    public override void LevelUp()
     {
-        if (towerLevel == 1)
+        towerLevel += 1;
+        if (towerLevel == 2)
         {
             GameObject turretbase = Resources.Load("Turrets/Snow/Base 1") as GameObject;
             transform.GetChild(0).GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
             GameObject turretcrystal = Resources.Load("Turrets/Snow/Crystal 1") as GameObject;
             transform.GetChild(0).GetChild(0).GetComponent<MeshFilter>().mesh = turretcrystal.GetComponent<MeshFilter>().sharedMesh;
         }
-        else if (towerLevel == 2)
+        else if (towerLevel == 3)
         {
             GameObject turretbase = Resources.Load("Turrets/Snow/Base 2") as GameObject;
             transform.GetChild(0).GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
@@ -122,8 +126,8 @@ public class SnowCrystalScript : TurretScript
             transform.GetChild(0).GetChild(0).GetComponent<MeshFilter>().mesh = turretcrystal.GetComponent<MeshFilter>().sharedMesh;
             transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
         }
+
         LevelUpgrades(0.1f, 3.0f);
-        towerLevel += 1;
     }
 
     public void Slow(GameObject target)
@@ -143,5 +147,18 @@ public class SnowCrystalScript : TurretScript
     {
         Sloweffect -= slow;
         proximity += range;
+    }
+
+    public override int GetCost()
+    {
+        return towerCost[towerLevel];
+    }
+    public override int GetLevel()
+    {
+        return towerLevel;
+    }
+    public override int[] GetCostArray()
+    {
+        return towerCost;
     }
 }
