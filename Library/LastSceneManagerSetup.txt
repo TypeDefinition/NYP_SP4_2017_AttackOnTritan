@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Jacob_test_turret.unity
+=======
+- path: Assets/Scenes/Levels/Level_1.unity
+>>>>>>> a61001dac323b73b22319b99051a6c8c2b27bfd9
   isLoaded: 1
   isActive: 1

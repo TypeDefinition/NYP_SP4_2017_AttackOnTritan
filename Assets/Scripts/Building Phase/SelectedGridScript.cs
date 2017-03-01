@@ -64,13 +64,10 @@ public class SelectedGridScript : MonoBehaviour
             return;
         }
         selectedGrid = theGridSystem.GetGrid(startSelectedGridID).GetComponent<Grid>();
+        if (selectedGrid == null)
+            print("selecting grid not initialised");
         transform.position = theGridSystem.GetGrid(startSelectedGridID).transform.position;
         theGridSystem.RenderGrids(true);
-
-        showcaseGO = GameObject.Instantiate(selectedPrefab);
-        showcaseGO.transform.SetParent(transform);
-        showcaseGO.transform.position = selectedGrid.transform.position;
-        CanGameobjectBePlaced();
     }
 
     void ListOpenUpdate()
@@ -263,8 +260,9 @@ public class SelectedGridScript : MonoBehaviour
                 selectedGrid.wall.GetComponent<TurretTowerScript>().gridSystem = theGridSystem;
 
                 selectedGrid.wall.AddComponent<Health>();
-                selectedGrid.wall.GetComponent<Health>().SetMaxHealth(50);
-                selectedGrid.wall.GetComponent<Health>().SetCurrentHealth(50);
+                selectedGrid.wall.GetComponent<Health>().SetMaxHealth(100);
+                selectedGrid.wall.GetComponent<Health>().SetCurrentHealth(100);
+                selectedGrid.wall.GetComponent<HealthBar>().enabled = true;
                 selectedGrid.wall.transform.SetParent(selectedGrid.transform);
                 buildingPhaseSystem.numberOfBuildableWalls -= 1;
             }
@@ -278,7 +276,6 @@ public class SelectedGridScript : MonoBehaviour
         buildingPhaseSystem.UpdateText();
     }
 
-
     // Called when the selection of the prefab changes
     public void ChangeSelected()
     {
@@ -289,7 +286,8 @@ public class SelectedGridScript : MonoBehaviour
         showcaseGO = GameObject.Instantiate(selectedPrefab);
         showcaseGO.transform.SetParent(transform);
         showcaseGO.transform.position = transform.position;
-        
+        if (selectedGrid == null)
+            selectedGrid = theGridSystem.GetGrid(startSelectedGridID).GetComponent<Grid>();
         CanGameobjectBePlaced();
         ChangeTurretTranslateOnTower();
         CheckCostAndNumber();

@@ -40,6 +40,8 @@ public class BuildingPhaseSystemScript : MonoBehaviour {
             return;
         }
         selectingGrid.selectedPrefab = towerPrefabs[0];
+        if (selectingGrid == null)
+            print("selecting grid not initialised");
         selectingGrid.ChangeSelected();
         UpdateText();
     }

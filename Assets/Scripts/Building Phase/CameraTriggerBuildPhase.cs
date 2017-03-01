@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraMoveScript : MonoBehaviour {
+public class CameraTriggerBuildPhase : MonoBehaviour {
 
-    [SerializeField]
-    private float speed;
     private Animator animator;
 
     [SerializeField]
@@ -13,6 +11,10 @@ public class CameraMoveScript : MonoBehaviour {
     private GameObject buildingPhasePrefab;
     [SerializeField]
     private BuildingPhaseSystemScript buildingPhaseSystem;
+    [SerializeField]
+    private CameraController cameraController;
+    [SerializeField]
+    private TouchScreenCameraController tsCameraController;
 
 	// Use this for initialization
 	void Start () {
@@ -21,22 +23,6 @@ public class CameraMoveScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.position -= new Vector3(speed * Time.deltaTime, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.position -= new Vector3(0, 0, speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.position += new Vector3(0, 0, speed * Time.deltaTime);
-        }
         if(!selectedGrid.gameObject.activeInHierarchy && 
             !buildingPhasePrefab.gameObject.activeInHierarchy &&
             !buildingPhaseSystem.gameObject.activeInHierarchy)
@@ -47,6 +33,10 @@ public class CameraMoveScript : MonoBehaviour {
                 selectedGrid.gameObject.SetActive(true);
                 buildingPhasePrefab.gameObject.SetActive(true);
                 buildingPhaseSystem.gameObject.SetActive(true);
+                GetComponent<CameraMovement>().enabled = true;
+                cameraController.enabled = true;
+                tsCameraController.enabled = true;
+                tsCameraController.transform.GetComponent<Canvas>().enabled = true;
             }
         }
 	}
