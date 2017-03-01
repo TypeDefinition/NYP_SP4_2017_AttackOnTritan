@@ -17,13 +17,16 @@ public class SnowCrystalScript : TurretScript
     [SerializeField]
     private int[] towerCost;
 
+    void Awake()
+    {
+        proximity = 10f;
+    }
     // Use this for initialization
     protected override void Start()
     {
         //onGrid; 
         base.Start();
         attackSpeed = 0.5f;
-        proximity = 10.0f;
         direction = new Vector3(0, 0, 0);
         Sloweffect = 0.8f;
         Snowradius = 6.0f;
@@ -160,5 +163,9 @@ public class SnowCrystalScript : TurretScript
     public override int[] GetCostArray()
     {
         return towerCost;
+    }
+    public override float GetProximity()
+    {
+        return proximity;
     }
 }

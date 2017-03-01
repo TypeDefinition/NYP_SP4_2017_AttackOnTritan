@@ -13,7 +13,8 @@ public class TowerSelectPanelScript : MonoBehaviour {
     // The group of toggles
     public ToggleGroup towerToggleGroup;
     // To store the tower prefabs from buildiPhaseSystem
-    public List<Sprite> sprites;
+    public List<Sprite> costSprites;
+    public List<Sprite> towerSprites;
 
     private GameObject[] towerPrefabs;
 
@@ -45,11 +46,11 @@ public class TowerSelectPanelScript : MonoBehaviour {
             towerGOScript.towerName = towerPrefabs[i].name;
             towerGOScript.towerPrefab = towerPrefabs[i];
             towerGOScript.buildingPhaseSystem = buildingPhaseSystem;
-
+            towerGOScript.towerImage = towerSprites[i];
             if (towerPrefabs[i].CompareTag("Wall"))
             {
                 towerGOScript.towerCost = 1;
-                towerGOScript.costImage = sprites[0];
+                towerGOScript.costImage = costSprites[0];
             }
             else
             {
@@ -58,7 +59,7 @@ public class TowerSelectPanelScript : MonoBehaviour {
                 {
                     towerGOScript.towerCost = turret.GetCost();
                 }
-                towerGOScript.costImage = sprites[1];
+                towerGOScript.costImage = costSprites[1];
             }
             Transform parentTransform = gameObject.transform.parent;
 
@@ -66,7 +67,6 @@ public class TowerSelectPanelScript : MonoBehaviour {
             towerGO.transform.SetParent(content.transform);
             towerGO.transform.localScale = content.transform.localScale;    
         }
-
 	}
 	
 	// Update is called once per frame
