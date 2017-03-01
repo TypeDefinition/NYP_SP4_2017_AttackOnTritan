@@ -103,7 +103,6 @@ public class FBManager : MonoBehaviour {
         if (!string.IsNullOrEmpty(result.Url))
         {
             AppLinkURL = ""+result.Url+"";
-
         }
         else
         {
@@ -116,7 +115,7 @@ public class FBManager : MonoBehaviour {
         FB.FeedShare(string.Empty,
             new Uri(AppLinkURL),
             "Attack on Tritan",
-            "Caption",
+            "Defend the Tritan",
             "Check out this game",
             new Uri("https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"),
             string.Empty,
@@ -145,8 +144,7 @@ public class FBManager : MonoBehaviour {
         FB.Mobile.AppInvite(
             new Uri(AppLinkURL),
             new Uri("https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"),
-            InviteCallback
-            );
+            InviteCallback);
     }
 
     void InviteCallback(IResult result)
@@ -162,34 +160,6 @@ public class FBManager : MonoBehaviour {
         else if (!string.IsNullOrEmpty(result.RawResult))
         {
             Debug.Log("Successfully Invited");
-        }
-    }
-
-    public void ShareWithUsers()
-    {
-        FB.AppRequest("Try and beat my score",
-            null,
-            new List<object>() { "app_users" },
-            null,
-            null,
-            null,
-            null,
-            ShareWithUsersCallback);
-    }
-
-    void ShareWithUsersCallback(IAppRequestResult result)
-    {
-        if (result.Cancelled)
-        {
-            Debug.Log("Challenge Cancelled");
-        }
-        else if (!string.IsNullOrEmpty(result.Error))
-        {
-            Debug.Log("Error on Challenge!");
-        }
-        else if (!string.IsNullOrEmpty(result.RawResult))
-        {
-            Debug.Log("Successfully Mentally Challenged");
         }
     }
 

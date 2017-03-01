@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class PostStageScript : MonoBehaviour {
 
     public int waveCount;
     public GameObject winCanvas;
+    public Button continueButton;
 
     [SerializeField]
     private BuildingPhaseSystemScript buildingPhaseSystem;    // The building phase system
@@ -24,7 +25,6 @@ public class PostStageScript : MonoBehaviour {
     private int[] walls;
     private Animator anim;
     private GameObject backToLevelSelect;
-    private float lifeTime;
     private bool startLifeTimeCounter;
     /////////////////////////////
 
@@ -38,7 +38,6 @@ public class PostStageScript : MonoBehaviour {
         }
         anim = winCanvas.GetComponent<Animator>();
         backToLevelSelect = GameObject.Find("Main Menu Camera");
-        lifeTime = 5f;
         startLifeTimeCounter = false;
         waveCount = 0;
 	}
@@ -46,15 +45,7 @@ public class PostStageScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         
-        if(startLifeTimeCounter)
-        {
-            lifeTime -= Time.deltaTime;
-            if (lifeTime <= 0)
-            {
-                backToLevelSelect.GetComponent<Menu>().GoToLevelSelect();
-            }
-        }
-        else
+        if(!startLifeTimeCounter)
         {
             for (int i = 0; i < spawners.Length; ++i)
             {
@@ -101,5 +92,11 @@ public class PostStageScript : MonoBehaviour {
 
         theGridSystem.EnableGridCollider(true);
         theGridSystem.RenderGrids(true);
+    }
+
+    public void VictoryScreen()
+    {
+        if(startLifeTimeCounter)
+            backToLevelSelect.GetComponent<Menu>().GoToLevelSelect();
     }
 }

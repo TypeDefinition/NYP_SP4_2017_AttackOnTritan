@@ -12,17 +12,10 @@ public class FBScript : MonoBehaviour {
     public GameObject DisplayProfile;
 
 	// Use this for initialization
-	void Awake () {
+	void Awake () { 
         FBManager.manager.InitFB();
         FBMenus(FB.IsLoggedIn);
     }
-
-    // Update is called once per frame
-    void Update () {
-	
-	}
-
-    
 
     public void FBLogin()
     {
@@ -60,28 +53,12 @@ public class FBScript : MonoBehaviour {
     {
         if (isLoggedIn)
         {
+            if (DisplayProfile)
+            {
+                FBProfile();
+            }          
             Loggedin.SetActive(true);
             Loggedout.SetActive(false);
-
-            if (FBManager.manager.profilename != null)
-            {
-                Text Username = DisplayUsername.GetComponent<Text>();
-                Username.text = "Hi, " + FBManager.manager.profilename;
-            }
-            else
-            {
-                StartCoroutine("WaitForProfileName");
-            }
-
-            if (FBManager.manager.profilepic != null)
-            {
-                Image profilepic = DisplayProfile.GetComponent<Image>();
-                profilepic.sprite = FBManager.manager.profilepic;
-            }
-            else
-            {
-                StartCoroutine("WaitForProfilePic");
-            }
         }
         else
         {
@@ -90,9 +67,34 @@ public class FBScript : MonoBehaviour {
         }
     }
 
+    void FBProfile()
+    {
+
+        if (FBManager.manager.profilename != null)
+        {
+            Text Username = DisplayUsername.GetComponent<Text>();
+            Username.text = FBManager.manager.profilename;
+        }
+        else
+        {
+            StartCoroutine("WaitForProfileName");
+        }
+
+        if (FBManager.manager.profilepic != null)
+        {
+            Image profilepic = DisplayProfile.GetComponent<Image>();
+            profilepic.sprite = FBManager.manager.profilepic;
+        }
+        else
+        {
+            StartCoroutine("WaitForProfilePic");
+        }
+
+    }
+
     IEnumerator WaitForProfileName()
     {
-        while(FBManager.manager.profilename == null)
+        while (FBManager.manager.profilename == null)
         {
             yield return null;
         }
@@ -117,12 +119,9 @@ public class FBScript : MonoBehaviour {
 
     public void Invite()
     {
-        FBManager.manager.Share();
+        FBManager.manager.Invite();
     }
-    public void Challenge()
-    {
-        FBManager.manager.ShareWithUsers();
-    }
+
     public void logout()
     {
         FBManager.manager.PlayerLogout();
