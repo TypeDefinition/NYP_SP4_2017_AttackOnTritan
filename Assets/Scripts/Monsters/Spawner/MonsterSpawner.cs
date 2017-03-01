@@ -40,6 +40,7 @@ public class MonsterSpawner : MonoBehaviour {
 
 	[SerializeField]
 	private GameObject[] bossPrefabs = new GameObject[(uint)BOSS_TYPE.NUM_BOSS_TYPE];
+	private List<GameObject> bossList; //Don't do object pooling for boss. Not worth it.
 
     // Use this for like, initialization even before initialization. Initializationception!
 	void Awake() {
@@ -52,6 +53,8 @@ public class MonsterSpawner : MonoBehaviour {
 		for (int i = 0; i < monsterPoolIndex.Length; ++i) {
 			monsterPoolIndex[i] = 0;
 		}
+
+		bossList = new List<GameObject>();
 
         temporaryTestStartStageButton = false;
         temporaryTestStopStageButton = false;
@@ -164,11 +167,12 @@ public class MonsterSpawner : MonoBehaviour {
 		}
 
 		if (path != null && path.Count > 0) { //Place the monster at the start of the path.			
-			GameObject monster = GameObject.Instantiate(bossPrefabs[(uint)_bossType]);
-			monster.GetComponent<AIFollowPath>().gridSystem = gridSystem;
-			monster.GetComponent<AIFollowPath>().path = shortestPath;
-			monster.GetComponent<AIAttackCrystal>().tritanCrystal = endGrid.tritanCrystal;
-			monster.GetComponent<Transform>().position = gridSystem.GetGrid(path[0]).GetComponent<Transform>().position + new Vector3(0, 0.2f, 0);
+			GameObject boss = GameObject.Instantiate(bossPrefabs[(uint)_bossType]);
+			boss.GetComponent<AIFollowPath>().gridSystem = gridSystem;
+			boss.GetComponent<AIFollowPath>().path = shortestPath;
+			boss.GetComponent<AIAttackCrystal>().tritanCrystal = endGrid.tritanCrystal;
+			boss.GetComponent<Transform>().position = gridSystem.GetGrid(path[0]).GetComponent<Transform>().position + new Vector3(0, 0.2f, 0);
+			bossList.Add(boss);
 			return true;
 		} else {
 			print("Cannot spawn boss without a path!");
@@ -210,6 +214,14 @@ public class MonsterSpawner : MonoBehaviour {
 			}
 			monsterPool[monsterType].Clear();
 		}
+
+		for (int i = 0; i < bossList.Count; ++i) {
+			if (bossList[i] == null) {
+				continue;
+			}
+			GameObject.Destroy(bossList[i]);
+		}
+		bossList.Clear();
 	}
 
 	public int GetStartID() {
@@ -285,9 +297,21 @@ public class MonsterSpawner : MonoBehaviour {
     public bool HasActiveMonsters() {
 		for (int i = 0; i < monsterPool.Length; ++i) {
 			for (int j = 0; j < monsterPool[i].Count; ++j) {
+				if (monsterPool[i][j] == null) {
+					continue;
+				}
 				if (monsterPool[i][j].activeSelf == true) {
 					return true;
 				}
+			}
+		}
+
+		for (int i = 0; i < bossList.Count; ++i) {
+			if (bossList[i] == null) {
+				continue;
+			}
+			if (bossList[i].activeSelf == true) {
+				return true;
 			}
 		}
 		return false;

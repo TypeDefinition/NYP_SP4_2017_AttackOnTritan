@@ -146,9 +146,12 @@
      <Compile Include="Assets\Scripts\Building Phase\TowerListToggleScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\TowerPrefabScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\TowerSelectPanelScript.cs" />
+     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
+     <Compile Include="Assets\Scripts\Camera\OffscreenTargetIndicator.cs" />
      <Compile Include="Assets\Scripts\Common\AxisAlignedBillboard.cs" />
      <Compile Include="Assets\Scripts\Common\Billboard.cs" />
+     <Compile Include="Assets\Scripts\Common\Explosion.cs" />
      <Compile Include="Assets\Scripts\Common\Health.cs" />
      <Compile Include="Assets\Scripts\Common\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Facebook\FBManager.cs" />
@@ -183,7 +186,6 @@
      <Compile Include="Assets\Scripts\SaveFile\GameControl.cs" />
      <Compile Include="Assets\Scripts\Settings\ScreenResolution.cs" />
      <Compile Include="Assets\Scripts\Tritan Crystal\TritanCrystal.cs" />
-     <Compile Include="Assets\Scripts\Tritan Crystal\TritanCrystalExplosion.cs" />
      <Compile Include="Assets\Scripts\Turrets\AcidTurretScript.cs" />
      <Compile Include="Assets\Scripts\Turrets\MachineGunScript.cs" />
      <Compile Include="Assets\Scripts\Turrets\Mortar\MortarProjectileScript.cs" />
