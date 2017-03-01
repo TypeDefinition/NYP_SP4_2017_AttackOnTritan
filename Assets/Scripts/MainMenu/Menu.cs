@@ -137,6 +137,11 @@ public class Menu : MonoBehaviour {
         MainOn();
     }
 
+    public void GoToLevelSelect()
+    {
+        SceneManager.LoadScene("MainMenu");
+        LevelSelectOn();
+    }
     public void ExitGame()
     {
         Application.Quit();

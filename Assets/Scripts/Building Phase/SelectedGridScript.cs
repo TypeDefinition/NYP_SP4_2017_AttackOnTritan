@@ -371,6 +371,10 @@ public class SelectedGridScript : MonoBehaviour
             theGridRenderer.material.SetColor("_Color", Color.green);
             buildingPhaseSystem.SelectedWallButton();
         }
+        for (int i = 0; i < spawners.Length; ++i)
+        {
+            spawners[i].GetComponent<MonsterSpawner>().GeneratePath();
+        }
     }
     public void ChangeToOpenPhase()
     {
