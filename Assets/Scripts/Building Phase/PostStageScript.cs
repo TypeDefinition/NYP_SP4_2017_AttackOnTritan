@@ -26,10 +26,11 @@ public class PostStageScript : MonoBehaviour {
     private Animator anim;
     private GameObject backToLevelSelect;
     private bool startLifeTimeCounter;
+    private int maxStages;
     /////////////////////////////
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 
         if(buildingPhaseSystem == null)
         {
@@ -40,6 +41,13 @@ public class PostStageScript : MonoBehaviour {
         backToLevelSelect = GameObject.Find("Main Menu Camera");
         startLifeTimeCounter = false;
         waveCount = 0;
+        maxStages = 0;
+        
+        for (int i = 0; i < spawners.Length; ++i)
+        {
+            maxStages = Mathf.Max(maxStages, spawners[i].transform.childCount);
+        }
+        print(maxStages);
 	}
 	
 	// Update is called once per frame
@@ -53,17 +61,33 @@ public class PostStageScript : MonoBehaviour {
                 {
                     return;
                 } 
-                else if (spawners[i].transform.childCount <= waveCount + 1)
-                {
-                    // Codes to End level happy since you finished all waves in the level
-                    anim.SetTrigger("Win");
-                    startLifeTimeCounter = true;
-                    return;
-                }
+            }
+            if (maxStages <= waveCount + 1)
+            {
+                // Codes to End level happy since you finished all waves in the level
+                anim.SetTrigger("Win");
+                startLifeTimeCounter = true;
 
+                int score = 0;
+                int numcrystals = 0;
+                //sets score                
+                GameObject[] Crystals = GameObject.FindGameObjectsWithTag("Tritan Crystal");
+                foreach (GameObject Crystal in Crystals)
+                {
+                    if (Crystal.GetComponent<Health>())
+                    {
+                        score = Crystal.GetComponent<Health>().GetCurrentHealth();
+                        ++numcrystals;
+                    }                  
+                }
+                score = score / numcrystals;
+                GameControl.control.Save(score);
+
+                return;
             }
             BackToBuildingPhase();
             waveCount++;
+            
             this.gameObject.SetActive(false);
         }
      

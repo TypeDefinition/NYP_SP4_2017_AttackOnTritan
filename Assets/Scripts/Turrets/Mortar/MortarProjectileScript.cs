@@ -12,14 +12,11 @@ public class MortarProjectileScript : MonoBehaviour {
     {
     }
 
-    // Use this for initialization
-    void Start()
-    {
-    }
 
-// Update is called once per frame
-    void Update () {
-        if (this.GetComponent<Rigidbody>().velocity.y < 0 && this.GetComponent<Rigidbody>().position.y <=0)
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject);
+        if (collision.gameObject.name == "Terrain")
         {
             Collider[] inrange = Physics.OverlapSphere(transform.position, Explosion_radius, LayerMask.GetMask("Monster"));
             foreach (Collider enemy in inrange)
@@ -33,11 +30,10 @@ public class MortarProjectileScript : MonoBehaviour {
             Destroy(this.gameObject);
             GameObject temp = Instantiate(radius);
             temp.transform.position = transform.position;
-            temp.transform.localScale = new Vector3(Explosion_radius * 2, 0.1f, Explosion_radius * 2);
+            temp.transform.localScale = new Vector3(Explosion_radius * 2, 1.0f, Explosion_radius * 2);
             Debug.Log(temp.transform.localScale);
             Destroy(temp, 0.1f);
         }
-
     }
 
     public void setRadius(float radius)

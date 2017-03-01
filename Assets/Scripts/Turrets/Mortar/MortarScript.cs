@@ -78,20 +78,13 @@ public class MortarScript : TurretScript
                     {
                         if ((transform.position - enemy.transform.position).magnitude < nearestDistance)
                         {
-                            nearestDistance = new Vector3(enemy.transform.position.x - transform.position.x, 0 , enemy.transform.position.z - transform.position.z).magnitude;
+                            nearestDistance = new Vector3(enemy.transform.position.x - transform.position.x, 0, enemy.transform.position.z - transform.position.z).magnitude;
                             target = enemy.transform.gameObject;
                             height = enemy.transform.position.y - transform.position.y;
                         }
                     }
-                    if (target.transform.GetComponent<Health>().GetCurrentHealth() <= 0)
-                    {
-                        target = null;
-                    }
-                    else
-                    {
-                        direction = target.transform.position - transform.position;
-                        initialiseprojectile(nearestDistance, height);
-                    }                   
+                    direction = target.transform.position - transform.position;
+                    initialiseprojectile(nearestDistance, height);
                     break;
                 }
 
@@ -144,7 +137,7 @@ public class MortarScript : TurretScript
         GameObject projectile = Instantiate(Bulletprefab);
         projectile.GetComponent<MortarProjectileScript>().setDamage(minAttackDamage, maxAttackDamage);
         projectile.GetComponent<MortarProjectileScript>().setRadius(explosion);
-        projectile.transform.position = transform.position;
+        projectile.transform.position += transform.position;
         Vector3 xyzdirection;
         //sin^-1(distance * gravity)/velocity^2
 

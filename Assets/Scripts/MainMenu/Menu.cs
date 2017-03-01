@@ -113,18 +113,27 @@ public class Menu : MonoBehaviour {
 
     public void GoToLevel1()
     {
+        GameControl.control.currlevel = 0;
         SceneManager.LoadScene("Level_1");
         PlayOn();
     }
     public void GoToLevel2()
     {
-        SceneManager.LoadScene("Level_2");
-        PlayOn();
+        if (GameControl.control.maxlevel > 0)
+        {
+            GameControl.control.currlevel = 1;
+            SceneManager.LoadScene("Level_2");
+            PlayOn();
+        }     
     }
     public void GoToLevel3()
     {
-        SceneManager.LoadScene("Level_3");
-        PlayOn();
+        if (GameControl.control.maxlevel > 1)
+        {
+            GameControl.control.currlevel = 2;
+            SceneManager.LoadScene("Level_3");
+            PlayOn();
+        }
     }
 
 

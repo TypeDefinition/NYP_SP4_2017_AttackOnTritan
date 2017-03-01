@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
@@ -31,22 +30,31 @@ public class GameControl : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            Save();
+            //Save();
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
             Load();
         }
     }
-    public void Save()
+    public void Save(int score)
     {
         
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/playerSave.dat");
 
         PlayerData data = new PlayerData();
-        data.Score[currlevel] = Score[currlevel];
+        int[] temp = new int[currlevel + 1];
+        Array.Copy(Score, temp, Score.Length);
         
+        data.Score = temp;
+        if (score >= data.Score[currlevel])
+        {
+            data.Score[currlevel] = score;
+            Score = data.Score;
+            levelcheck();
+        }
+
         bf.Serialize(file, data);
         file.Close();
     }
@@ -61,15 +69,17 @@ public class GameControl : MonoBehaviour {
             file.Close();
 
             Score = data.Score;
+            levelcheck();
         }
     }
 
     private void levelcheck()
     {
         maxlevel = 0;
+        Debug.Log(Score.Length);
         for (int i = 0; i < Score.Length; i++)
         {
-            if (Score[i] > 0 && Score[i] <= 300)
+            if (Score[i] > 0 && Score[i] <= 5000)
             {
                 ++maxlevel;
             }

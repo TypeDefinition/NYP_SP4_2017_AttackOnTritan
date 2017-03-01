@@ -234,7 +234,7 @@ public class SelectedGridScript : MonoBehaviour
             return;
     }
     // Called to place the gameobject
-    private void PlaceGameObject()
+    public void PlaceGameObject()
     {
         // If we are selecting a turret
         if (selectedPrefab.CompareTag("Turret"))

@@ -42,15 +42,6 @@ public class BuildingPhaseSystemScript : MonoBehaviour {
         selectingGrid.selectedPrefab = towerPrefabs[0];
         selectingGrid.ChangeSelected();
         UpdateText();
-
-        if (sellTurretButton ||
-            sellWallButton ||
-            upgradeButton ||
-            nextWaveButton)
-        {
-            print("No button");
-            return;
-        }
     }
 
     // Update is called once per frame
