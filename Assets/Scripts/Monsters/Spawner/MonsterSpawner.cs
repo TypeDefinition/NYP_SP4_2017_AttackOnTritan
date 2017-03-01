@@ -165,8 +165,8 @@ public class MonsterSpawner : MonoBehaviour {
 
 		if (path != null && path.Count > 0) { //Place the monster at the start of the path.			
 			GameObject monster = GameObject.Instantiate(bossPrefabs[(uint)_bossType]);
-			monster.GetComponent<AIFollowPath_Boss>().gridSystem = gridSystem;
-			monster.GetComponent<AIFollowPath_Boss>().path = shortestPath;
+			monster.GetComponent<AIFollowPath>().gridSystem = gridSystem;
+			monster.GetComponent<AIFollowPath>().path = shortestPath;
 			monster.GetComponent<AIAttackCrystal>().tritanCrystal = endGrid.tritanCrystal;
 			monster.GetComponent<Transform>().position = gridSystem.GetGrid(path[0]).GetComponent<Transform>().position + new Vector3(0, 0.2f, 0);
 			return true;

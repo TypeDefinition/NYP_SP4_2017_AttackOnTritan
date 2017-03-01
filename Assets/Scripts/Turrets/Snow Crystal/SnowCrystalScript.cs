@@ -9,7 +9,6 @@ public class SnowCrystalScript : TurretScript
     private GameObject curr;
     private GameObject particles;
 
-
     private Vector3 direction;
 
     private float Sloweffect;
@@ -26,7 +25,7 @@ public class SnowCrystalScript : TurretScript
         attackSpeed = 0.5f;
         proximity = 10.0f;
         direction = new Vector3(0, 0, 0);
-        Sloweffect = 0.9f;
+        Sloweffect = 0.8f;
         Snowradius = 6.0f;
         timer = attackSpeed;
     }
@@ -36,10 +35,7 @@ public class SnowCrystalScript : TurretScript
     {
         base.Update();
         if (curr)
-        {
-
-            direction = curr.transform.position - transform.position;
-            particles.transform.position = curr.transform.position;
+        {          
             if (direction.magnitude >= proximity)
             {
                 Destroy(curr.GetComponent<SnowStormScript>());
@@ -47,6 +43,11 @@ public class SnowCrystalScript : TurretScript
                 curr = null;
                 target = null;
                 timer = attackSpeed;
+            }
+            else
+            {
+                direction = curr.transform.position - transform.position;
+                particles.transform.position = curr.transform.position;
             }
         }
         if (Input.GetKeyDown(KeyCode.E))
@@ -108,14 +109,6 @@ public class SnowCrystalScript : TurretScript
                     break;
                 }
         }
-
-        //Debug.DrawRay(transform.position, direction, new Color(1, 0, 1), 10);
-
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, direction, out hit, proximity))
-        {
-
-        }
     }
 
     public override void LevelUp()
@@ -136,7 +129,8 @@ public class SnowCrystalScript : TurretScript
             transform.GetChild(0).GetChild(0).GetComponent<MeshFilter>().mesh = turretcrystal.GetComponent<MeshFilter>().sharedMesh;
             transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
         }
-        LevelUpgrades(0.1f, 6.0f);
+
+        LevelUpgrades(0.1f, 3.0f);
     }
 
     public void Slow(GameObject target)
@@ -154,7 +148,7 @@ public class SnowCrystalScript : TurretScript
 
     private void LevelUpgrades(float slow, float range)
     {
-        Sloweffect += slow;
+        Sloweffect -= slow;
         proximity += range;
     }
 

@@ -8,7 +8,10 @@ public class GameControl : MonoBehaviour {
 
     public static GameControl control;
 
-    public int level;
+    public int[] Score;
+    public int currlevel;
+    public int maxlevel;
+    
 
 	void Awake ()
     {
@@ -21,8 +24,9 @@ public class GameControl : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-	
-	}
+        levelcheck();
+        Debug.Log(maxlevel);
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
@@ -36,12 +40,13 @@ public class GameControl : MonoBehaviour {
     }
     public void Save()
     {
+        
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/playerSave.dat");
 
         PlayerData data = new PlayerData();
-        data.level = level;
-
+        data.Score[currlevel] = Score[currlevel];
+        
         bf.Serialize(file, data);
         file.Close();
     }
@@ -55,7 +60,19 @@ public class GameControl : MonoBehaviour {
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
-            level = data.level;
+            Score = data.Score;
+        }
+    }
+
+    private void levelcheck()
+    {
+        maxlevel = 0;
+        for (int i = 0; i < Score.Length; i++)
+        {
+            if (Score[i] > 0 && Score[i] <= 300)
+            {
+                ++maxlevel;
+            }
         }
     }
 }
@@ -63,5 +80,5 @@ public class GameControl : MonoBehaviour {
 [Serializable]
 class PlayerData
 {
-    public int level;
+    public int[] Score;
 }

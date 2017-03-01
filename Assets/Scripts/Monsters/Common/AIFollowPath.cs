@@ -111,6 +111,14 @@ public class AIFollowPath : MonoBehaviour {
 		return (path == null) || (pathIndex >= path.Count);
 	}
 
+	//Is there a wall obstructing us?
+	public GameObject GetObstructingWall() {
+		if (currentGrid == null) {
+			return null;
+		}
+		return currentGrid.GetComponent<Grid>().wall;
+	}
+
 	public void Reset() {
 		pathIndex = 0;
 	}

@@ -51,7 +51,7 @@ public class PostStageScript : MonoBehaviour {
             lifeTime -= Time.deltaTime;
             if (lifeTime <= 0)
             {
-                backToLevelSelect.GetComponent<Menu>().GoToMainMenu();
+                backToLevelSelect.GetComponent<Menu>().GoToLevelSelect();
             }
         }
         else

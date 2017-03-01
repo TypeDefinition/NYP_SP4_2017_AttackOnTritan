@@ -8,6 +8,7 @@ public class HealthBar : MonoBehaviour {
 	private GameObject background;
 	private GameObject foreground;
 
+	public bool showWhenFullHealth;
 	public Material material;
 	public Color backgroundColor, foregroundColor;
 	public float backgroundWidth, backgroundHeight;
@@ -33,6 +34,7 @@ public class HealthBar : MonoBehaviour {
 		rotation.eulerAngles = new Vector3(0, 180, 0);
 
 		background = GameObject.CreatePrimitive(PrimitiveType.Quad);
+		Destroy(background.GetComponent<MeshCollider>());
 		background.name = "Background";		
 		background.transform.SetParent(healthBar.transform);
 		background.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
@@ -40,6 +42,7 @@ public class HealthBar : MonoBehaviour {
 		background.transform.localRotation = rotation;
 
 		foreground = GameObject.CreatePrimitive(PrimitiveType.Quad);
+		Destroy(foreground.GetComponent<MeshCollider>());
 		foreground.name = "Foreground";
 		foreground.transform.SetParent(healthBar.transform);
 		foreground.transform.localPosition = new Vector3(0.0f, 0.0f, 0.1f);
@@ -67,9 +70,16 @@ public class HealthBar : MonoBehaviour {
 			return;
 		}
 
+		if (showWhenFullHealth == false && healthComponent.IsFullHealth()) {
+			healthBar.SetActive(false);
+			return;
+		} else {
+			healthBar.SetActive(true);
+		}
+
 		//Set their scales.
-		background.transform.localScale = new Vector3(backgroundWidth, backgroundHeight, 1.0f);
-		foreground.transform.localScale = new Vector3(foregroundWidth * healthComponent.GetHealthRatio(), foregroundHeight, 1.0f);
+		background.transform.localScale = new Vector3(Mathf.Max(0.001f, backgroundWidth), Mathf.Max(0.001f, backgroundHeight), 1.0f);
+		foreground.transform.localScale = new Vector3(Mathf.Max(0.001f, foregroundWidth * healthComponent.GetHealthRatio()), Mathf.Max(0.001f, foregroundHeight), 1.0f);
 
 		//Set the positions.
 		healthBar.transform.position = gameObject.transform.position + offset;
