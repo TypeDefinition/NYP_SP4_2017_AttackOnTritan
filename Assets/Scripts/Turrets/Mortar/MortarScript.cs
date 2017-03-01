@@ -19,6 +19,10 @@ public class MortarScript : TurretScript
     [SerializeField]
     private int[] towerCost;
 
+    void Awake()
+    {
+        proximity = 10f;
+    }
     // Use this for initialization
     protected override void Start()
     {
@@ -27,7 +31,6 @@ public class MortarScript : TurretScript
         minAttackDamage = 100;
         maxAttackDamage = 150;
         attackSpeed = 3.0f;
-        proximity = 10f;
         rotateSpd = 1f;
         attackStyle = ATTSTYLE.NEAREST_FIRST;
         velocity = Mathf.Sqrt((proximity+0.1f) * 9.8f);
@@ -171,5 +174,9 @@ public class MortarScript : TurretScript
     public override int[] GetCostArray()
     {
         return towerCost;
+    }
+    public override float GetProximity()
+    {
+        return proximity;
     }
 }

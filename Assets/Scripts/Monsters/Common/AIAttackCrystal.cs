@@ -167,6 +167,7 @@ public class AIAttackCrystal : AIAttack {
 				continue;
 			}*/
 			//If it's not facing us, also don't hurt it.
+			//print("Monster Forward: " + gameObject.GetComponent<Transform>().forward);
 			if (Vector3.Dot(gameObject.GetComponent<Transform>().forward, hitColliders[i].gameObject.GetComponent<Transform>().position - gameObject.transform.position) < 0.0f) {
 				continue;
 			}

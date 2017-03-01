@@ -83,8 +83,8 @@ public class AIBossBehaviour : MonoBehaviour {
 				AIDeath deadState = (AIDeath)states[(uint)currentState];
 				if (deadState.IsDone()) {
 					stop = true;
-					//gameObject.SetActive(false);
-					GameObject.Destroy(gameObject);
+					gameObject.SetActive(false);
+					//GameObject.Destroy(gameObject);
 				}
 				break;
 			default:

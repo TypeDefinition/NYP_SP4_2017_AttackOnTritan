@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class TowerPrefabScript : MonoBehaviour {
 
     public Sprite costImage  { get; set; }
+    public Sprite towerImage { get; set; }
     public string towerName { get; set; }
     public int towerCost    { get; set; }
     public GameObject towerPrefab; //{ get; set; }
@@ -19,6 +20,7 @@ public class TowerPrefabScript : MonoBehaviour {
 
         Image[] images = this.gameObject.GetComponentsInChildren<Image>();
         images[1].sprite = costImage;
+        images[2].sprite = towerImage;
     }
 	
 	// Update is called once per frame
@@ -30,5 +32,6 @@ public class TowerPrefabScript : MonoBehaviour {
     {
         buildingPhaseSystem.selectingGrid.selectedPrefab = towerPrefab;
         buildingPhaseSystem.selectingGrid.ChangeSelected();
+        buildingPhaseSystem.selectingGrid.UpdateRangeSphere();
     }
 }

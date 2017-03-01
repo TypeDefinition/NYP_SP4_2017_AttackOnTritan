@@ -18,6 +18,7 @@ public class BuildingPhaseSystemScript : MonoBehaviour {
 
     public Text wall;
     public Text currency;
+    public Text updateCost;
 
     [SerializeField]
     private int startGameWalls;
