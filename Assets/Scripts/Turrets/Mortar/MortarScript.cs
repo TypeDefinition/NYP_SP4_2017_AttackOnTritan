@@ -16,6 +16,8 @@ public class MortarScript : TurretScript
 
     public GameObject Bulletprefab;
 
+    [SerializeField]
+    private int[] towerCost;
 
     // Use this for initialization
     protected override void Start()
@@ -103,7 +105,7 @@ public class MortarScript : TurretScript
         
     }
 
-    public void LevelUp()
+    public override void LevelUp()
     {
       
         if (towerLevel == 1)
@@ -149,5 +151,18 @@ public class MortarScript : TurretScript
 
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.velocity = xyzdirection;
+    }
+
+    public override int GetCost()
+    {
+        return towerCost[towerLevel];
+    }
+    public override int GetLevel()
+    {
+        return towerLevel;
+    }
+    public override int[] GetCostArray()
+    {
+        return towerCost;
     }
 }
