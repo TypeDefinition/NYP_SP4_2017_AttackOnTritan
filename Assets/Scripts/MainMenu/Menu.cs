@@ -116,6 +116,16 @@ public class Menu : MonoBehaviour {
         SceneManager.LoadScene("Level_1");
         PlayOn();
     }
+    public void GoToLevel2()
+    {
+        SceneManager.LoadScene("Level_2");
+        PlayOn();
+    }
+    public void GoToLevel3()
+    {
+        SceneManager.LoadScene("Level_3");
+        PlayOn();
+    }
 
 
     public void PauseTime()
