@@ -65,4 +65,25 @@ public class MonsterSpawnerStage : MonoBehaviour {
 		}
 	}
 
+	public bool HasBoss() {
+		return CheckForBoss(gameObject.transform);
+	}
+
+	public bool CheckForBoss(Transform _transform) {
+		MonsterSpawnerWave wave = _transform.gameObject.GetComponent<MonsterSpawnerWave>();
+		if (wave != null && wave.spawnMode == MonsterSpawnerWave.SPAWN_MODE.BOSS) {
+			return true;
+		}
+
+		//Recursively do this.
+		foreach (Transform child in _transform) {
+			//Enable the MonsterSpawnerWave for this object.
+			if (CheckForBoss(child)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 }

@@ -14,6 +14,11 @@ public class MonsterSpawner : MonoBehaviour {
 	[SerializeField]
 	private bool hasActiveMonsters;
 
+	[SerializeField]
+	private bool hasBoss;
+	[SerializeField]
+	private int bossCheckStageIndex;
+
 	//These 2 have priority.
 	[SerializeField]
 	private Grid startGrid;
@@ -77,6 +82,7 @@ public class MonsterSpawner : MonoBehaviour {
             tempStageIndex = 0;
         }
 		hasActiveMonsters = HasActiveMonsters();
+		hasBoss = HasBoss(bossCheckStageIndex);
 
 		//Don't change the size. If you do I'll just keep changing it back.
 		//We migh also crash. Probably crash.
@@ -316,5 +322,27 @@ public class MonsterSpawner : MonoBehaviour {
 		}
 		return false;
     }
+
+	public bool HasBoss(int _stageIndex) {
+		if (_stageIndex < 0) {
+			return false;
+		}
+
+		int index = 0;
+		foreach (Transform child in gameObject.transform) {
+			//Check if it is a stage.
+			MonsterSpawnerStage stage = child.gameObject.GetComponent<MonsterSpawnerStage>();
+			if (stage == null) {
+				continue;
+			}
+
+			//Yes, this is the right one. We can stop now.
+			if (_stageIndex == index++) {
+				return stage.HasBoss();
+			}
+		}
+
+		return false;
+	}
 
 }
