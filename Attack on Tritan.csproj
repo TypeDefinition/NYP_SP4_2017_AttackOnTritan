@@ -164,6 +164,7 @@
     <Compile Include="Assets\Scripts\Building Phase\TowerListToggleScript.cs" />
     <Compile Include="Assets\Scripts\Building Phase\TowerPrefabScript.cs" />
     <Compile Include="Assets\Scripts\Building Phase\TowerSelectPanelScript.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Common\AxisAlignedBillboard.cs" />
     <Compile Include="Assets\Scripts\Common\Billboard.cs" />
     <Compile Include="Assets\Scripts\Common\Health.cs" />
@@ -187,10 +188,9 @@
     <Compile Include="Assets\Scripts\Monsters\Common\AIAttackCrystal.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIAttackWall.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Monsters\Common\AIBehaviour_Boss.cs" />
+    <Compile Include="Assets\Scripts\Monsters\Common\AIBossBehaviour.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIDeath.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIFollowPath.cs" />
-    <Compile Include="Assets\Scripts\Monsters\Common\AIFollowPath_Boss.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIMovement.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\MonsterType.cs" />
     <Compile Include="Assets\Scripts\Monsters\Spawner\MonsterSpawner.cs" />

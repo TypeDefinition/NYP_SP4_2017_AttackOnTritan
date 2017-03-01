@@ -32,7 +32,12 @@ public class SnowCrystalScript : TurretScript
     {
         base.Update();
         if (curr)
-        {          
+        {
+            direction = curr.transform.position - transform.position;
+            if (particles)
+            {
+                particles.transform.position = curr.transform.position;
+            }
             if (direction.magnitude >= proximity)
             {
                 Destroy(curr.GetComponent<SnowStormScript>());
@@ -40,11 +45,6 @@ public class SnowCrystalScript : TurretScript
                 curr = null;
                 target = null;
                 timer = attackSpeed;
-            }
-            else
-            {
-                direction = curr.transform.position - transform.position;
-                particles.transform.position = curr.transform.position;
             }
         }
         if (Input.GetKeyDown(KeyCode.E))
@@ -60,7 +60,6 @@ public class SnowCrystalScript : TurretScript
             curr = null;
             target = null;
         }
-
         return base.EnemiesInAttackRadius();
     }
 
@@ -75,20 +74,18 @@ public class SnowCrystalScript : TurretScript
                     {
                         if (!enemy.GetComponent<SnowStormScript>() || enemy.GetComponent<SnowStormScript>().Slow() < Sloweffect)
                         {
-                            if ((transform.position - enemy.transform.position).magnitude < nearestDistance)
+                            if ((transform.position - enemy.transform.position).magnitude<nearestDistance)
                             {
                                 nearestDistance = (enemy.transform.position - transform.position).magnitude;
                                 target = enemy.transform.gameObject;
                             }
-                        }
-                       
+                        }                     
                     }
                     if (!curr && target)
                     {
                         Slow(target);
                         curr = target;
-                    }
-                   
+                    }                   
                     break;
                 }
 
