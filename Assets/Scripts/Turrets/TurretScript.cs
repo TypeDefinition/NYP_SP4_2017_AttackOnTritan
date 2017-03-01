@@ -25,7 +25,7 @@ public class TurretScript : MonoBehaviour
 
     public virtual int GetLevel()
     {
-        return towerLevel; 
+        return 0; 
     }
     public virtual int GetCost()
     {
@@ -35,12 +35,11 @@ public class TurretScript : MonoBehaviour
     {
         return null;
     }
-
-    public float Proximity
+    public virtual float GetProximity()
     {
-        get { return proximity; }
-        set {  proximity = value; }
+        return 0f;
     }
+
     public ATTSTYLE Style
     {
         get { return attackStyle; }
@@ -51,7 +50,7 @@ public class TurretScript : MonoBehaviour
         set { towerLevel = value; }
         get { return towerLevel; }
     }
-    public int MaxLevel {
+    public int MaxLevel{
         get { return maxTowerLevel; }
     }
 

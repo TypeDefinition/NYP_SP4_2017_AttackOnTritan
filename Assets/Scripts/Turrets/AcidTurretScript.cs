@@ -10,6 +10,10 @@ public class AcidTurretScript : TurretScript {
     [SerializeField]
     private int[] towerCost;
 
+    void Awake()
+    {
+        proximity = 6f;
+    }
     // Use this for initialization
     protected override void Start()
     {
@@ -18,10 +22,9 @@ public class AcidTurretScript : TurretScript {
         minAttackDamage = 10;
         maxAttackDamage = 15;
         attackSpeed = 0.5f;
-        proximity = 6f;
         direction = new Vector3(0, 0, 0);
         rotateSpd = 3f;
-        attackStyle = ATTSTYLE.FURTHEST_FIRST;
+        attackStyle = ATTSTYLE.NEAREST_FIRST;
     }
 	
 	// Update is called once per frame
@@ -127,7 +130,6 @@ public class AcidTurretScript : TurretScript {
             transform.GetChild(0).GetComponent<MeshFilter>().mesh = barrel.GetComponent<MeshFilter>().sharedMesh;
         }
         LevelUpgrades(1, 2, 0.05f, 0.5f);
-        print(minAttackDamage + "," + maxAttackDamage);
     }
 
     public override int GetCost()
@@ -141,5 +143,9 @@ public class AcidTurretScript : TurretScript {
     public override int[] GetCostArray()
     {
         return towerCost;
+    }
+    public override float GetProximity()
+    {
+        return proximity;
     }
 }

@@ -12,6 +12,10 @@ public class TeslaScript : TurretScript {
     [SerializeField]
     private int[] towerCost;
 
+    void Awake()
+    {
+        proximity = 6f;
+    }
     // Use this for initialization
     protected override void Start()
     {
@@ -141,5 +145,9 @@ public class TeslaScript : TurretScript {
     public override int[] GetCostArray()
     {
         return towerCost;
+    }
+    public override float GetProximity()
+    {
+        return proximity;
     }
 }

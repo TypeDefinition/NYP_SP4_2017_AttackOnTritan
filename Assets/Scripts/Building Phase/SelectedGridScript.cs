@@ -34,6 +34,9 @@ public class SelectedGridScript : MonoBehaviour
     // Not CSGO. Just the instantiated version of the selectedPrefab, to show where the turret/tower is
     private GameObject showcaseGO;
 
+    public GameObject rangeIndicator;
+    private GameObject rangeSphere;
+
     public enum PHASE_MODE
     {
         LIST_OPEN = 0,
@@ -144,11 +147,15 @@ public class SelectedGridScript : MonoBehaviour
                         {
                             theGridRenderer.material.SetColor("_Color", Color.white);
                             buildingPhaseSystem.SelectedNothingButton();
+                            if (rangeSphere)
+                                Destroy(rangeSphere);
                         }
                         else if (selectedGrid.tower != null)
                         {
                             theGridRenderer.material.SetColor("_Color", Color.green);
                             buildingPhaseSystem.SelectedTowerButton();
+                            UpdateRangeSphere();
+                            UpdateUpgradeCost();
                         }
                         else if (selectedGrid.wall != null)
                         {
@@ -215,6 +222,8 @@ public class SelectedGridScript : MonoBehaviour
     {
         if (selectedPrefab.CompareTag("Wall"))
         {
+            if (rangeSphere)
+                Destroy(rangeSphere);
             CheckWallsCanBuild();
         }
         else if (selectedPrefab.CompareTag("Turret"))
@@ -375,11 +384,16 @@ public class SelectedGridScript : MonoBehaviour
         {
             spawners[i].GetComponent<MonsterSpawner>().GeneratePath();
         }
+        UpdateRangeSphere();
+        UpdateUpgradeCost();
     }
     public void ChangeToOpenPhase()
     {
+        if (rangeSphere)
+            Destroy(rangeSphere);
         ChangeSelected();
         buildingPhaseSystem.DisableAllButtons();
+        UpdateRangeSphere();
     }
     public int DestroySelectedTurret()
     {
@@ -406,9 +420,42 @@ public class SelectedGridScript : MonoBehaviour
     public int UpgradeSelectedTurret()
     {
        int cost = selectedGrid.tower.GetComponentInChildren<TurretScript>().GetCost();
-       print(cost);
        selectedGrid.tower.GetComponentInChildren<TurretScript>().LevelUp();
+       UpdateRangeSphere();
+       UpdateUpgradeCost();
        return cost;
+    }
+    public void UpdateUpgradeCost()
+    {
+        if (selectedGrid.tower == null)
+            return;
+        int currentLevel = selectedGrid.tower.GetComponentInChildren<TurretScript>().GetLevel();
+        if (currentLevel > selectedGrid.tower.GetComponentInChildren<TurretScript>().MaxLevel - 1)
+            return;
+        buildingPhaseSystem.updateCost.text = selectedGrid.tower.GetComponentInChildren<TurretScript>().GetCostArray()[currentLevel].ToString();
+        CheckTowerUpdate();
+    }
+    public void UpdateRangeSphere()
+    {
+        if (phaseMode == PHASE_MODE.LIST_OPEN && showcaseGO.CompareTag("Turret"))
+        {
+            rangeSphere = GameObject.Instantiate(rangeIndicator);
+            rangeSphere.transform.position = showcaseGO.transform.position;
+            rangeSphere.transform.SetParent(showcaseGO.transform);
+            float tempScale = showcaseGO.GetComponentInChildren<TurretScript>().GetProximity() * 2;
+            rangeSphere.transform.localScale = new Vector3(tempScale, tempScale, tempScale);
+        }
+        else if(phaseMode == PHASE_MODE.LIST_CLOSE && selectedGrid.tower != null)
+        {
+            if (rangeSphere == null)
+            {
+                rangeSphere = GameObject.Instantiate(rangeIndicator);
+            }
+            rangeSphere.transform.position = selectedGrid.tower.transform.position;
+            rangeSphere.transform.SetParent(selectedGrid.tower.transform);
+            float tempScale = selectedGrid.tower.GetComponentInChildren<TurretScript>().GetProximity() * 2;
+            rangeSphere.transform.localScale = new Vector3(tempScale, tempScale, tempScale);
+        }
     }
 }
  

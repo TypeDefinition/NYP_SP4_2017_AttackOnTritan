@@ -10,6 +10,10 @@ public class PlasmaScript : TurretScript {
     [SerializeField]
     private int[] towerCost;
 
+    void Awake()
+    {
+        proximity = 4f;
+    }
     // Use this for initialization
     protected override void Start()
     {
@@ -18,7 +22,6 @@ public class PlasmaScript : TurretScript {
         minAttackDamage = 10;
         maxAttackDamage = 15;
         attackSpeed = 0.5f;
-        proximity = 4f;
         direction = new Vector3(0, 0, 0);
         rotateSpd = 3f;
         attackStyle = ATTSTYLE.FURTHEST_FIRST;
@@ -127,7 +130,7 @@ public class PlasmaScript : TurretScript {
             GameObject barrel = Resources.Load("Turrets/Plasma/Barrel 2") as GameObject;
             transform.GetChild(0).GetComponent<MeshFilter>().mesh = barrel.GetComponent<MeshFilter>().sharedMesh;
         }
-        LevelUpgrades(1, 2, 0.05f, 0.5f);
+        LevelUpgrades(4, 7, 0.05f, 0f);
     }
 
     public override int GetCost()
@@ -141,5 +144,9 @@ public class PlasmaScript : TurretScript {
     public override int[] GetCostArray()
     {
         return towerCost;
+    }
+    public override float GetProximity()
+    {
+        return proximity;
     }
 }
