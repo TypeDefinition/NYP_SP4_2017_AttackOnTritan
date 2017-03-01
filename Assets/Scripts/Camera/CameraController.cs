@@ -3,20 +3,21 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
-	CameraMovement cameraMovement;
+	public Camera camera;
+	[Range(0.0f, 100.0f)] [SerializeField]
+	private float movementSpeed;
 
 	// Use this for initialization
 	void Start () {
-		cameraMovement = gameObject.GetComponent<CameraMovement>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (cameraMovement == null) {
-			cameraMovement = gameObject.GetComponent<CameraMovement>();
-			if (cameraMovement == null) {
-				return;
-			}
+		CameraMovement cameraMovement = null;
+		if (camera == null || camera.GetComponent<CameraMovement>() == null) {
+			return;
+		} else {
+			cameraMovement = camera.GetComponent<CameraMovement>();
 		}
 
 		if (Input.GetButtonDown("Change Camera Mode")) {
@@ -29,6 +30,15 @@ public class CameraController : MonoBehaviour {
 			cameraMovement.RotateRight();
 		}
 
-		cameraMovement.Move(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), Input.GetAxis("Camera Height"));
+		cameraMovement.Move(Time.deltaTime * movementSpeed * Input.GetAxis("Vertical"), Time.deltaTime * movementSpeed * Input.GetAxis("Horizontal"), Time.deltaTime * movementSpeed * Input.GetAxis("Camera Height"));
 	}
+
+	public float GetMovementSpeed() {
+		return movementSpeed;
+	}
+
+	public Camera GetCamera() {
+		return camera;
+	}
+
 }

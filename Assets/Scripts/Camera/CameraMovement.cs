@@ -82,6 +82,7 @@ public class CameraMovement : MonoBehaviour {
 		gameObject.transform.position += forward * moveVector.z;
 		gameObject.transform.position += right * moveVector.x;
 		gameObject.transform.position += up * moveVector.y;
+		moveVector = new Vector3(0.0f, 0.0f, 0.0f); //Reset it.
 
 		LimitPositionToBoundary();
 	}
@@ -116,9 +117,9 @@ public class CameraMovement : MonoBehaviour {
 	}
 
 	public void Move(float _forward, float _right, float _up) {
-		moveVector.x = _right;
-		moveVector.y = _up;
-		moveVector.z = _forward;
+		moveVector.x += _right;
+		moveVector.y += _up;
+		moveVector.z += _forward;
 	}
 
 }
