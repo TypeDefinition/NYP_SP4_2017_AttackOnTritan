@@ -5,10 +5,10 @@ public class MortarProjectileScript : MonoBehaviour {
 
     public GameObject radius;
     private float Explosion_radius;
-    private float minDamage;
-    private float maxDamage;
+    private int minDamage;
+    private int maxDamage;
 
-    MortarProjectileScript(float explosion, float minDamage, float maxDamage)
+    MortarProjectileScript(float explosion, int minDamage, int maxDamage)
     {
     }
 
@@ -24,7 +24,11 @@ public class MortarProjectileScript : MonoBehaviour {
             Collider[] inrange = Physics.OverlapSphere(transform.position, Explosion_radius, LayerMask.GetMask("Monster"));
             foreach (Collider enemy in inrange)
             {
-                //Debug.Log(enemy.gameObject);
+                Health mobHealth = enemy.transform.GetComponent<Health>();
+                if (mobHealth != null)
+                {
+                    mobHealth.DecreaseHealth(Random.Range(minDamage, maxDamage));
+                }
             }
             Destroy(this.gameObject);
             GameObject temp = Instantiate(radius);
@@ -40,7 +44,7 @@ public class MortarProjectileScript : MonoBehaviour {
     {
         this.Explosion_radius = radius;
     }
-    public void setDamage(float minD, float maxD)
+    public void setDamage(int minD, int maxD)
     {
         this.minDamage = minD;
         this.maxDamage = maxD;

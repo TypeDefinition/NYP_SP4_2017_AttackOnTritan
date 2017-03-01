@@ -16,6 +16,8 @@ public class MortarScript : TurretScript
 
     public GameObject Bulletprefab;
 
+    [SerializeField]
+    private int[] towerCost;
 
     // Use this for initialization
     protected override void Start()
@@ -24,9 +26,9 @@ public class MortarScript : TurretScript
         base.Start();
         minAttackDamage = 100;
         maxAttackDamage = 150;
-        attackSpeed = 0.5f;
+        attackSpeed = 3.0f;
         proximity = 10f;
-        rotateSpd = 3f;
+        rotateSpd = 1f;
         attackStyle = ATTSTYLE.NEAREST_FIRST;
         velocity = Mathf.Sqrt((proximity+0.1f) * 9.8f);
         explosion = 5.0f;
@@ -42,8 +44,7 @@ public class MortarScript : TurretScript
             // Gets Vector3 direction from traget
             direction = target.transform.position - transform.position;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction.normalized), Time.deltaTime * rotateSpd);
-
-}
+        }
         else
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, originalRotation, Time.deltaTime * rotateSpd);
@@ -52,6 +53,7 @@ public class MortarScript : TurretScript
         {
             LevelUp();
         }
+
 
     }
 
@@ -78,7 +80,15 @@ public class MortarScript : TurretScript
                             height = enemy.transform.position.y - transform.position.y;
                         }
                     }
-                    initialiseprojectile(nearestDistance, height);
+                    if (target.transform.GetComponent<Health>().GetCurrentHealth() <= 0)
+                    {
+                        target = null;
+                    }
+                    else
+                    {
+                        direction = target.transform.position - transform.position;
+                        initialiseprojectile(nearestDistance, height);
+                    }                   
                     break;
                 }
 
@@ -94,16 +104,14 @@ public class MortarScript : TurretScript
                             height = enemy.transform.position.y - transform.position.y;
                         }
                     }
+                    direction = target.transform.position - transform.position;
                     initialiseprojectile(longestDistance, height);
                     break;
                 }
-        }
-
-        Debug.DrawRay(transform.position, direction, new Color(1, 0, 1), 10);
-        
+        }        
     }
 
-    public void LevelUp()
+    public override void LevelUp()
     {
       
         if (towerLevel == 1)
@@ -120,7 +128,8 @@ public class MortarScript : TurretScript
             GameObject turretbarrel = Resources.Load("Turrets/Mortar/Turret 2") as GameObject;
             transform.GetChild(0).GetChild(0).GetComponent<MeshFilter>().mesh = turretbarrel.GetComponent<MeshFilter>().sharedMesh;
         }
-        LevelUpgrades(1, 2, 0.05f, 0.5f);
+        LevelUpgrades(25, 50, 0.25f, 1.5f);
+        explosion += 1.0f;
         towerLevel += 1;
         velocity = Mathf.Sqrt((proximity + 0.1f) * 9.8f);
 
@@ -149,5 +158,18 @@ public class MortarScript : TurretScript
 
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.velocity = xyzdirection;
+    }
+
+    public override int GetCost()
+    {
+        return towerCost[towerLevel];
+    }
+    public override int GetLevel()
+    {
+        return towerLevel;
+    }
+    public override int[] GetCostArray()
+    {
+        return towerCost;
     }
 }

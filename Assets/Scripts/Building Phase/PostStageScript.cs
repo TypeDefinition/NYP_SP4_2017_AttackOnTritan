@@ -4,6 +4,7 @@ using System.Collections;
 public class PostStageScript : MonoBehaviour {
 
     public int waveCount;
+    public GameObject winCanvas;
 
     [SerializeField]
     private BuildingPhaseSystemScript buildingPhaseSystem;    // The building phase system
@@ -21,6 +22,10 @@ public class PostStageScript : MonoBehaviour {
     private int[] currency;
     [SerializeField]
     private int[] walls;
+    private Animator anim;
+    private GameObject backToLevelSelect;
+    private float lifeTime;
+    private bool startLifeTimeCounter;
     /////////////////////////////
 
 	// Use this for initialization
@@ -31,27 +36,46 @@ public class PostStageScript : MonoBehaviour {
             Debug.Log("Building phase system is foiled");
             return;
         }
+        anim = winCanvas.GetComponent<Animator>();
+        backToLevelSelect = GameObject.Find("Main Menu Camera");
+        lifeTime = 5f;
+        startLifeTimeCounter = false;
         waveCount = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        for (int i = 0; i < spawners.Length; ++i)
+        
+        if(startLifeTimeCounter)
         {
-            if (spawners[i].transform.childCount <= waveCount + 1)
+            lifeTime -= Time.deltaTime;
+            if (lifeTime <= 0)
             {
-                // Codes to End level happy since you finished all waves in the level
-                return;
+                backToLevelSelect.GetComponent<Menu>().GoToLevelSelect();
             }
-            if (spawners[i].HasActiveMonsters())
-            {
-                return;
-            }                
         }
-        print("Spawners Done.");
-        BackToBuildingPhase();
-        waveCount++;
-        this.gameObject.SetActive(false);
+        else
+        {
+            for (int i = 0; i < spawners.Length; ++i)
+            {
+                if (spawners[i].HasActiveMonsters())
+                {
+                    return;
+                } 
+                else if (spawners[i].transform.childCount <= waveCount + 1)
+                {
+                    // Codes to End level happy since you finished all waves in the level
+                    anim.SetTrigger("Win");
+                    startLifeTimeCounter = true;
+                    return;
+                }
+
+            }
+            BackToBuildingPhase();
+            waveCount++;
+            this.gameObject.SetActive(false);
+        }
+     
 	}
 
     public void BackToBuildingPhase()

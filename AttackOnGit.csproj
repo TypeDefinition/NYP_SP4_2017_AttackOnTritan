@@ -58,12 +58,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -170,8 +164,12 @@
     <Compile Include="Assets\Scripts\Building Phase\TowerListToggleScript.cs" />
     <Compile Include="Assets\Scripts\Building Phase\TowerPrefabScript.cs" />
     <Compile Include="Assets\Scripts\Building Phase\TowerSelectPanelScript.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Camera\OffscreenTargetIndicator.cs" />
     <Compile Include="Assets\Scripts\Common\AxisAlignedBillboard.cs" />
     <Compile Include="Assets\Scripts\Common\Billboard.cs" />
+    <Compile Include="Assets\Scripts\Common\Explosion.cs" />
     <Compile Include="Assets\Scripts\Common\Health.cs" />
     <Compile Include="Assets\Scripts\Common\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Facebook\FBManager.cs" />
@@ -193,10 +191,9 @@
     <Compile Include="Assets\Scripts\Monsters\Common\AIAttackCrystal.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIAttackWall.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Monsters\Common\AIBehaviour_Boss.cs" />
+    <Compile Include="Assets\Scripts\Monsters\Common\AIBossBehaviour.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIDeath.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIFollowPath.cs" />
-    <Compile Include="Assets\Scripts\Monsters\Common\AIFollowPath_Boss.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\AIMovement.cs" />
     <Compile Include="Assets\Scripts\Monsters\Common\MonsterType.cs" />
     <Compile Include="Assets\Scripts\Monsters\Spawner\MonsterSpawner.cs" />
@@ -207,11 +204,11 @@
     <Compile Include="Assets\Scripts\SaveFile\GameControl.cs" />
     <Compile Include="Assets\Scripts\Settings\ScreenResolution.cs" />
     <Compile Include="Assets\Scripts\Tritan Crystal\TritanCrystal.cs" />
-    <Compile Include="Assets\Scripts\Tritan Crystal\TritanCrystalExplosion.cs" />
     <Compile Include="Assets\Scripts\Turrets\AcidTurretScript.cs" />
     <Compile Include="Assets\Scripts\Turrets\MachineGunScript.cs" />
     <Compile Include="Assets\Scripts\Turrets\Mortar\MortarProjectileScript.cs" />
     <Compile Include="Assets\Scripts\Turrets\Mortar\MortarScript.cs" />
+    <Compile Include="Assets\Scripts\Turrets\PlasmaScript.cs" />
     <Compile Include="Assets\Scripts\Turrets\Snow Crystal\SnowCrystalScript.cs" />
     <Compile Include="Assets\Scripts\Turrets\Snow Crystal\SnowStormScript.cs" />
     <Compile Include="Assets\Scripts\Turrets\TeslaScript.cs" />
