@@ -131,7 +131,7 @@ public class TeslaScript : TurretScript {
             GameObject turretbase = Resources.Load("Turrets/Tesla/Tesla 2") as GameObject;
             transform.parent.parent.GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
         }
-        LevelUpgrades(3, 7, 0.08f, 0.2f);
+        LevelUpgrades(3, 7, 0.08f, 0f);
     }
 
     public override int GetCost()

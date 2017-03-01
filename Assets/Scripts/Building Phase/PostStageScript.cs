@@ -5,6 +5,7 @@ public class PostStageScript : MonoBehaviour {
 
     public int waveCount;
     public GameObject winCanvas;
+    public GameObject bossCanvas;
     public Button continueButton;
 
     [SerializeField]
@@ -24,9 +25,11 @@ public class PostStageScript : MonoBehaviour {
     [SerializeField]
     private int[] walls;
     private Animator anim;
+    private Animator anim2;
     private GameObject backToLevelSelect;
     private bool startLifeTimeCounter;
     private int maxStages;
+    private bool checkBoss;
     /////////////////////////////
 
 	// Use this for initialization
@@ -38,16 +41,17 @@ public class PostStageScript : MonoBehaviour {
             return;
         }
         anim = winCanvas.GetComponent<Animator>();
+        anim2 = bossCanvas.GetComponent<Animator>();
         backToLevelSelect = GameObject.Find("Main Menu Camera");
         startLifeTimeCounter = false;
         waveCount = 0;
         maxStages = 0;
+        checkBoss = false;
 
         for (int i = 0; i < spawners.Length; ++i)
         {
             maxStages = Mathf.Max(maxStages, spawners[i].transform.childCount);
         }
-        print(maxStages);
 	}
 	
 	// Update is called once per frame
@@ -69,10 +73,31 @@ public class PostStageScript : MonoBehaviour {
                 startLifeTimeCounter = true;
                 return;
             }
-            BackToBuildingPhase();
-            waveCount++;
-            
-            this.gameObject.SetActive(false);
+
+            for (int i = 0; i < spawners.Length; ++i)
+            {
+                if (!checkBoss && spawners[i].HasBoss(waveCount + 1))
+                {
+                    checkBoss = true;
+                    anim2.SetTrigger("BossHere");
+                }
+            }
+            if (checkBoss && anim2.GetCurrentAnimatorStateInfo(0).IsName("KillMessageState"))
+            {
+                print("HI");
+                anim2.enabled = false;
+                BackToBuildingPhase();
+                waveCount++;
+                checkBoss = false;
+                this.gameObject.SetActive(false);
+            }
+            else if(!checkBoss)
+            {
+                BackToBuildingPhase();
+                waveCount++;
+                checkBoss = false;
+                this.gameObject.SetActive(false);
+            }
         }
      
 	}

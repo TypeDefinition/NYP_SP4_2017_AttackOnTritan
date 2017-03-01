@@ -139,7 +139,7 @@
      <Compile Include="Assets\FacebookSDK\SDK\Scripts\Utils\MiniJson.cs" />
      <Compile Include="Assets\FacebookSDK\SDK\Scripts\Utils\Utilities.cs" />
      <Compile Include="Assets\Scripts\Building Phase\BuildingPhaseSystemScript.cs" />
-     <Compile Include="Assets\Scripts\Building Phase\CameraMoveScript.cs" />
+     <Compile Include="Assets\Scripts\Building Phase\CameraTriggerBuildPhase.cs" />
      <Compile Include="Assets\Scripts\Building Phase\PostStageScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\SelectedGridScript.cs" />
      <Compile Include="Assets\Scripts\Building Phase\StartStageScript.cs" />
