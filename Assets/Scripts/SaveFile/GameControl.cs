@@ -23,20 +23,11 @@ public class GameControl : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+        Load();
         levelcheck();
         Debug.Log(maxlevel);
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            //Save();
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Load();
-        }
-    }
+
     public void Save(int score)
     {
         

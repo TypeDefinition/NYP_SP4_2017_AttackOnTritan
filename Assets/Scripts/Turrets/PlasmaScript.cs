@@ -19,8 +19,8 @@ public class PlasmaScript : TurretScript {
     {
         //onGrid; 
         base.Start();
-        minAttackDamage = 10;
-        maxAttackDamage = 15;
+        minAttackDamage = 135;
+        maxAttackDamage = 165;
         attackSpeed = 0.5f;
         direction = new Vector3(0, 0, 0);
         rotateSpd = 3f;
@@ -130,7 +130,7 @@ public class PlasmaScript : TurretScript {
             GameObject barrel = Resources.Load("Turrets/Plasma/Barrel 2") as GameObject;
             transform.GetChild(0).GetComponent<MeshFilter>().mesh = barrel.GetComponent<MeshFilter>().sharedMesh;
         }
-        LevelUpgrades(4, 7, 0.05f, 0f);
+        LevelUpgrades(70, 70, 0.05f, 0f);
     }
 
     public override int GetCost()
