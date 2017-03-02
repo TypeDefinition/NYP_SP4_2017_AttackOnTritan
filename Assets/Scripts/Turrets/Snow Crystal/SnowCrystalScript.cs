@@ -37,6 +37,10 @@ public class SnowCrystalScript : TurretScript
     protected override void Update()
     {
         base.Update();
+        if (!curr && particles)
+        {
+            Destroy(particles);
+        }
         if (curr)
         {
             direction = curr.transform.position - transform.position;
@@ -52,10 +56,6 @@ public class SnowCrystalScript : TurretScript
                 target = null;
                 timer = attackSpeed;
             }
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            LevelUp();
         }
     }
 
@@ -80,18 +80,18 @@ public class SnowCrystalScript : TurretScript
                     {
                         if (!enemy.GetComponent<SnowStormScript>() || enemy.GetComponent<SnowStormScript>().Slow() < Sloweffect)
                         {
-                            if ((transform.position - enemy.transform.position).magnitude<nearestDistance)
+                            if ((transform.position - enemy.transform.position).magnitude < nearestDistance)
                             {
                                 nearestDistance = (enemy.transform.position - transform.position).magnitude;
                                 target = enemy.transform.gameObject;
                             }
-                        }                     
+                        }
                     }
                     if (!curr && target)
                     {
                         Slow(target);
                         curr = target;
-                    }                   
+                    }
                     break;
                 }
 

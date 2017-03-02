@@ -44,7 +44,7 @@ public class PostStageScript : MonoBehaviour {
         }
         anim = winCanvas.GetComponent<Animator>();
         anim2 = bossCanvas.GetComponent<Animator>();
-        backToLevelSelect = GameObject.Find("Main Menu Camera");
+        backToLevelSelect = Camera.main.gameObject;
         startLifeTimeCounter = false;
         waveCount = 0;
         maxStages = 0;
@@ -102,7 +102,6 @@ public class PostStageScript : MonoBehaviour {
             }
             if (checkBoss && anim2.GetCurrentAnimatorStateInfo(0).IsName("KillMessageState"))
             {
-                print("HI");
                 anim2.enabled = false;
                 BackToBuildingPhase();
                 waveCount++;
@@ -144,7 +143,9 @@ public class PostStageScript : MonoBehaviour {
         theGridSystem.EnableGridCollider(true);
         theGridSystem.RenderGrids(true);
 
-        canvasUI.GetComponent<Canvas>().enabled = false;
+        #if UNITY_ANDROID == true
+            canvasUI.GetComponent<Canvas>().enabled = false;
+        #endif
     }
 
     public void VictoryScreen()

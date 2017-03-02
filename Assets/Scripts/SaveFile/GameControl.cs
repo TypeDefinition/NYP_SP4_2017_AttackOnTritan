@@ -94,7 +94,7 @@ public class GameControl : MonoBehaviour {
 
     public void UnlockAll()
     {
-        maxlevel = 2;
+        maxlevel = 3;
     }
 }
 

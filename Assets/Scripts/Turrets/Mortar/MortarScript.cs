@@ -52,12 +52,6 @@ public class MortarScript : TurretScript
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, originalRotation, Time.deltaTime * rotateSpd);
         }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            LevelUp();
-        }
-
-
     }
 
     protected override Collider[] EnemiesInAttackRadius()
@@ -110,14 +104,15 @@ public class MortarScript : TurretScript
     public override void LevelUp()
     {
       
-        if (towerLevel == 1)
+        towerLevel += 1;
+        if (towerLevel == 2)
         {
             GameObject turretbase = Resources.Load("Turrets/Mortar/Base 1") as GameObject;
             transform.GetChild(0).GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
             GameObject turretbarrel = Resources.Load("Turrets/Mortar/Turret 1") as GameObject;
             transform.GetChild(0).GetChild(0).GetComponent<MeshFilter>().mesh = turretbarrel.GetComponent<MeshFilter>().sharedMesh;
         }
-        else if (towerLevel == 2)
+        else if (towerLevel == 3)
         {
             GameObject turretbase = Resources.Load("Turrets/Mortar/Base 2") as GameObject;
             transform.GetChild(0).GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
@@ -126,7 +121,6 @@ public class MortarScript : TurretScript
         }
         LevelUpgrades(75, 100, 0.25f, 1.5f);
         explosion += 1.0f;
-        towerLevel += 1;
         velocity = Mathf.Sqrt((proximity + 0.1f) * 9.8f);
 
     }

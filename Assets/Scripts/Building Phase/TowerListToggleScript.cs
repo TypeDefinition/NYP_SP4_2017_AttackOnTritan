@@ -32,7 +32,9 @@ public class TowerListToggleScript : MonoBehaviour {
                 return;
             selectedGrid.phaseMode = SelectedGridScript.PHASE_MODE.LIST_CLOSE;
             animator.Play("CloseList");
-            cameraUI.enabled = true;
+            #if UNITY_ANDROID == true
+                cameraUI.enabled = true;
+            #endif
             selectedGrid.ChangeToClosePhase();
         }
         else if(selectedGrid.phaseMode == SelectedGridScript.PHASE_MODE.LIST_CLOSE)
@@ -41,7 +43,9 @@ public class TowerListToggleScript : MonoBehaviour {
                 return;
             selectedGrid.phaseMode = SelectedGridScript.PHASE_MODE.LIST_OPEN;
             animator.Play("OpenList");
-            cameraUI.enabled = false;
+            #if UNITY_ANDROID == true
+                cameraUI.enabled = false;
+            #endif
             selectedGrid.ChangeToOpenPhase();
         }
     }
@@ -51,6 +55,8 @@ public class TowerListToggleScript : MonoBehaviour {
         thisToggle.isOn = true;
         selectedGrid.phaseMode = SelectedGridScript.PHASE_MODE.LIST_OPEN;
         selectedGrid.ChangeToOpenPhase();
-        cameraUI.enabled = true;
+        #if UNITY_ANDROID == true
+            cameraUI.enabled = true;
+        #endif
     }
 }

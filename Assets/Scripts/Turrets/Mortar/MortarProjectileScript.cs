@@ -34,6 +34,10 @@ public class MortarProjectileScript : MonoBehaviour {
             Debug.Log(temp.transform.localScale);
             Destroy(temp, 0.1f);
         }
+        if (collision.gameObject.tag == "Grid")
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void setRadius(float radius)

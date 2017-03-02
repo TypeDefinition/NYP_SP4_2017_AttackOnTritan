@@ -275,9 +275,11 @@
     <None Include="Assets\FacebookSDK\SDK\Editor\android\DefaultAndroidManifest.xml" />
     <None Include="Assets\FacebookSDK\SDK\Scripts\Canvas\Resources\JSSDKBindings.txt" />
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+    <None Include="Assets\Shaders\CelShaded Terrain Shaders\CelShaded-AddPass.shader" />
+    <None Include="Assets\Shaders\CelShaded Terrain Shaders\CelShaded-Base.shader" />
+    <None Include="Assets\Shaders\CelShaded Terrain Shaders\CelShaded-FirstPass.shader" />
     <None Include="Assets\Shaders\CelSurfaceShader.shader" />
     <None Include="Assets\Shaders\CelSurfaceShaderLeaves.shader" />
-    <None Include="Assets\Shaders\CelSurfaceShaderTerrain.shader" />
     <None Include="Assets\Unity Assets\ENTIGI\Readme.txt" />
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Unity Assets\MOBA and Tower Defense\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
