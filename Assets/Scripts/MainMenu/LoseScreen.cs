@@ -20,8 +20,8 @@ public class LoseScreen : MonoBehaviour
         anim = gameObject.GetComponent(typeof(Animator)) as Animator;
         destroyed = false;
         lifetime = 5;
-        check = GameObject.Find("Main Menu Camera");
-
+        //check = GameObject.Find("Main Menu Camera");
+        check = Camera.main.gameObject;
     }
 
     // Update is called once per frame

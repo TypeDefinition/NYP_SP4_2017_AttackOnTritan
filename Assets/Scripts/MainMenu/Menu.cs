@@ -135,7 +135,15 @@ public class Menu : MonoBehaviour {
             PlayOn();
         }
     }
-
+    public void GoToLevel4()
+    {
+        if (GameControl.control.maxlevel > 2)
+        {
+            GameControl.control.currlevel = 3;
+            SceneManager.LoadScene("Level_4");
+            PlayOn();
+        }
+    }
 
     public void PauseTime()
     {
