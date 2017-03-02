@@ -10,7 +10,7 @@ public class GameControl : MonoBehaviour {
     public int[] Score;
     public int currlevel;
     public int maxlevel;
-    
+    public bool deleteSaves;
 
 	void Awake ()
     {
@@ -25,7 +25,17 @@ public class GameControl : MonoBehaviour {
         }
         Load();
         levelcheck();
+        deleteSaves = false;
         Debug.Log(maxlevel);
+    }
+
+    void Update()
+    {
+        if(deleteSaves == true)
+        {
+            DeleteSaves();
+            deleteSaves = false;
+        }
     }
 
     public void Save(int score)
@@ -75,6 +85,16 @@ public class GameControl : MonoBehaviour {
                 ++maxlevel;
             }
         }
+    }
+
+    public void DeleteSaves()
+    {
+        maxlevel = 0;
+    }
+
+    public void UnlockAll()
+    {
+        maxlevel = 2;
     }
 }
 

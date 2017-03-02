@@ -13,11 +13,14 @@ public class OffscreenTargetIndicator : MonoBehaviour {
 
 	private GameObject[] targetIndicators;
 	private Canvas canvas;
+    [SerializeField]
 	private Camera camera;
 
 	// Use this for initialization
-	void Start () {	
-		camera = Camera.main;
+	void Start () {
+        if (camera == null) {
+            camera = Camera.main;
+        }		
 		canvas = gameObject.GetComponent<Canvas>();
 		if (canvas != null && targetIndicatorPrefab != null) {
 			targetIndicators = new GameObject[maxIndicators];
@@ -39,11 +42,12 @@ public class OffscreenTargetIndicator : MonoBehaviour {
 			print(gameObject.name + " has no targetIndicatorPrefab.");
 			return;
 		}
-
-		camera = Camera.main;
-		if (camera == null) {
-			return;
-		}
+        if (camera == null) {
+            camera = Camera.main;
+            if (camera == null) {
+                return;
+            }
+        }		
 
 		//Set everything to false by default.
 		for (int i = 0; i < targetIndicators.Length; ++i) {

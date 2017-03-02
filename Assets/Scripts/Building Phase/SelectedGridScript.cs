@@ -45,6 +45,7 @@ public class SelectedGridScript : MonoBehaviour
 
     // Testing
     public Camera mainCamera;
+    public GameObject explosionPrefab;
     // Use this for initialization
     void Start()
     {
@@ -258,6 +259,7 @@ public class SelectedGridScript : MonoBehaviour
                 selectedGrid.wall.AddComponent<TurretTowerScript>();
                 selectedGrid.wall.GetComponent<TurretTowerScript>().tileID = selectedGrid.GetID();
                 selectedGrid.wall.GetComponent<TurretTowerScript>().gridSystem = theGridSystem;
+                selectedGrid.wall.GetComponent<TurretTowerScript>().explosion = explosionPrefab;
 
                 selectedGrid.wall.AddComponent<Health>();
                 selectedGrid.wall.GetComponent<Health>().SetMaxHealth(100);
