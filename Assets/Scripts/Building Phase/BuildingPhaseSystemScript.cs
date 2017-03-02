@@ -43,6 +43,7 @@ public class BuildingPhaseSystemScript : MonoBehaviour {
         if (selectingGrid == null)
             print("selecting grid not initialised");
         selectingGrid.ChangeSelected();
+        selectingGrid.ChangeToOpenPhase();
         UpdateText();
     }
 
@@ -70,11 +71,6 @@ public class BuildingPhaseSystemScript : MonoBehaviour {
         amountToBuildTowers -= selectingGrid.UpgradeSelectedTurret();
         selectingGrid.CheckTowerUpdate();
         UpdateText();
-    }
-
-    public void NextWaveButton()
-    {
-
     }
 
     public void SelectedTowerButton()
