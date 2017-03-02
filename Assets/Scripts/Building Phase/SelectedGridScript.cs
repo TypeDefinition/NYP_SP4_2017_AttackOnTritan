@@ -90,7 +90,7 @@ public class SelectedGridScript : MonoBehaviour
                     }
                 }
             }
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonUp(0))
             {
                 if (EventSystem.current.IsPointerOverGameObject())
                 {
@@ -262,6 +262,7 @@ public class SelectedGridScript : MonoBehaviour
                 selectedGrid.wall.AddComponent<Health>();
                 selectedGrid.wall.GetComponent<Health>().SetMaxHealth(100);
                 selectedGrid.wall.GetComponent<Health>().SetCurrentHealth(100);
+                selectedGrid.wall.GetComponent<HealthBar>().transform.SetParent(selectedGrid.wall.transform);
                 selectedGrid.wall.GetComponent<HealthBar>().enabled = true;
                 selectedGrid.wall.transform.SetParent(selectedGrid.transform);
                 buildingPhaseSystem.numberOfBuildableWalls -= 1;

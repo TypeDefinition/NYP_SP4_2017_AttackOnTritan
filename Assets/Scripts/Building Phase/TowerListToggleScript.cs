@@ -7,6 +7,7 @@ public class TowerListToggleScript : MonoBehaviour {
     public SelectedGridScript selectedGrid;
     private Toggle thisToggle;
     public Animator animator;
+    public Canvas cameraUI;
 	// Use this for initialization
 	void Start () {
 	    if(selectedGrid == null)
