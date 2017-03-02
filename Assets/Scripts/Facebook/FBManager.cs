@@ -116,7 +116,7 @@ public class FBManager : MonoBehaviour {
             new Uri(AppLinkURL),
             "Attack on Tritan",
             "Defend the Tritan",
-            "Try to beat my score of " + GameControl.control.Score[GameControl.control.currlevel] + " at level" + GameControl.control.currlevel,
+            "Try to beat my highscore of " + GameControl.control.Score[GameControl.control.currlevel] + " at level" + GameControl.control.currlevel,
             new Uri("https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"),
             string.Empty,
             ShareCallback

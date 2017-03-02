@@ -90,15 +90,15 @@ public class SelectedGridScript : MonoBehaviour
                         CanGameobjectBePlaced();
                     }
                 }
-            }
-            if (Input.GetMouseButtonUp(0))
-            {
-                if (EventSystem.current.IsPointerOverGameObject())
+                if (Input.GetMouseButtonUp(0))
                 {
-                    return;
+                    if (EventSystem.current.IsPointerOverGameObject())
+                    {
+                        return;
+                    }
+                    if (isAbleToPlacePrefab && hasResources)
+                        PlaceGameObject();
                 }
-                if (isAbleToPlacePrefab && hasResources)
-                    PlaceGameObject();
             }
         }
         // If there is no selection
