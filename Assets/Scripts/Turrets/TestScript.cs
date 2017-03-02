@@ -5,7 +5,7 @@ public class TestScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        this.GetComponent<Rigidbody>().velocity = new Vector3(1, 0, 0);
+        this.GetComponent<Rigidbody>().velocity = new Vector3(4, 0, 0);
 
     }
 

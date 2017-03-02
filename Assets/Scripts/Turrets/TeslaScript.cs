@@ -21,8 +21,8 @@ public class TeslaScript : TurretScript {
     {
         //onGrid; 
         base.Start();
-        minAttackDamage = 5;
-        maxAttackDamage = 8;
+        minAttackDamage = 30;
+        maxAttackDamage = 45;
         attackSpeed = 0.25f;
         proximity = 6f;
         direction = new Vector3(0, 0, 0);
@@ -131,7 +131,7 @@ public class TeslaScript : TurretScript {
             GameObject turretbase = Resources.Load("Turrets/Tesla/Tesla 2") as GameObject;
             transform.parent.parent.GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
         }
-        LevelUpgrades(3, 7, 0.08f, 0f);
+        LevelUpgrades(15, 20, 0.08f, 0f);
     }
 
     public override int GetCost()

@@ -19,8 +19,8 @@ public class AcidTurretScript : TurretScript {
     {
         //onGrid; 
         base.Start();
-        minAttackDamage = 10;
-        maxAttackDamage = 15;
+        minAttackDamage = 60;
+        maxAttackDamage = 90;
         attackSpeed = 0.5f;
         direction = new Vector3(0, 0, 0);
         rotateSpd = 3f;
@@ -129,7 +129,7 @@ public class AcidTurretScript : TurretScript {
             GameObject barrel = Resources.Load("Turrets/Acid/Barrel 2") as GameObject;
             transform.GetChild(0).GetComponent<MeshFilter>().mesh = barrel.GetComponent<MeshFilter>().sharedMesh;
         }
-        LevelUpgrades(1, 2, 0.05f, 0.5f);
+        LevelUpgrades(30, 45, 0.05f, 0.5f);
     }
 
     public override int GetCost()
