@@ -12,15 +12,15 @@ public class AcidTurretScript : TurretScript {
 
     void Awake()
     {
-        proximity = 6f;
+        proximity = 8f;
     }
     // Use this for initialization
     protected override void Start()
     {
         //onGrid; 
         base.Start();
-        minAttackDamage = 60;
-        maxAttackDamage = 90;
+        minAttackDamage = 30;
+        maxAttackDamage = 45;
         attackSpeed = 0.5f;
         direction = new Vector3(0, 0, 0);
         rotateSpd = 3f;
@@ -129,7 +129,7 @@ public class AcidTurretScript : TurretScript {
             GameObject barrel = Resources.Load("Turrets/Acid/Barrel 2") as GameObject;
             transform.GetChild(0).GetComponent<MeshFilter>().mesh = barrel.GetComponent<MeshFilter>().sharedMesh;
         }
-        LevelUpgrades(30, 45, 0.05f, 0.5f);
+        LevelUpgrades(15, 30, 0.05f, 0.5f);
     }
 
     public override int GetCost()

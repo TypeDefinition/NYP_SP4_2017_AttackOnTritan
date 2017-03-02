@@ -14,7 +14,7 @@ public class TeslaScript : TurretScript {
 
     void Awake()
     {
-        proximity = 6f;
+        proximity = 9f;
     }
     // Use this for initialization
     protected override void Start()
@@ -131,7 +131,7 @@ public class TeslaScript : TurretScript {
             GameObject turretbase = Resources.Load("Turrets/Tesla/Tesla 2") as GameObject;
             transform.parent.parent.GetComponent<MeshFilter>().mesh = turretbase.GetComponent<MeshFilter>().sharedMesh;
         }
-        LevelUpgrades(15, 20, 0.08f, 0f);
+        LevelUpgrades(15, 20, 0.08f, 1f);
     }
 
     public override int GetCost()
