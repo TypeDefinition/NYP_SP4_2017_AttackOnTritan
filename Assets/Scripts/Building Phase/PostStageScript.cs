@@ -7,6 +7,7 @@ public class PostStageScript : MonoBehaviour {
     public GameObject winCanvas;
     public GameObject bossCanvas;
     public Button continueButton;
+    public Text scoretext;
 
     [SerializeField]
     private BuildingPhaseSystemScript buildingPhaseSystem;    // The building phase system
@@ -85,6 +86,7 @@ public class PostStageScript : MonoBehaviour {
                     }                  
                 }
                 score = score / numcrystals;
+                scoretext.text += "" + score;
                 GameControl.control.Save(score);
 
                 return;
