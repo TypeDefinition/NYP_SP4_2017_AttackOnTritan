@@ -130,7 +130,7 @@ public class SnowCrystalScript : TurretScript
             transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
         }
 
-        LevelUpgrades(0.1f, 3.0f);
+        LevelUpgrades(0.1f, 0.5f);
     }
 
     public void Slow(GameObject target)

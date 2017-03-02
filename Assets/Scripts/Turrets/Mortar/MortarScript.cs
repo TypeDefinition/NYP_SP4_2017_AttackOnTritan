@@ -30,7 +30,7 @@ public class MortarScript : TurretScript
         base.Start();
         minAttackDamage = 285;
         maxAttackDamage = 315;
-        attackSpeed = 3.0f;
+        attackSpeed = 5.0f;
         rotateSpd = 1f;
         attackStyle = ATTSTYLE.NEAREST_FIRST;
         velocity = Mathf.Sqrt((proximity+0.1f) * 9.8f);
@@ -124,7 +124,7 @@ public class MortarScript : TurretScript
             GameObject turretbarrel = Resources.Load("Turrets/Mortar/Turret 2") as GameObject;
             transform.GetChild(0).GetChild(0).GetComponent<MeshFilter>().mesh = turretbarrel.GetComponent<MeshFilter>().sharedMesh;
         }
-        LevelUpgrades(140, 150, 0.25f, 1.5f);
+        LevelUpgrades(75, 100, 0.25f, 1.5f);
         explosion += 1.0f;
         towerLevel += 1;
         velocity = Mathf.Sqrt((proximity + 0.1f) * 9.8f);

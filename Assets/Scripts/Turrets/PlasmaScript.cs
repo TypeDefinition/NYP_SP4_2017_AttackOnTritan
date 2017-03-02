@@ -12,7 +12,7 @@ public class PlasmaScript : TurretScript {
 
     void Awake()
     {
-        proximity = 4f;
+        proximity = 5f;
     }
     // Use this for initialization
     protected override void Start()
