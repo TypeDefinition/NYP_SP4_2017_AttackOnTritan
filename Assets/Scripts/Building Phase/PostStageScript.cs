@@ -30,6 +30,7 @@ public class PostStageScript : MonoBehaviour {
     private bool startLifeTimeCounter;
     private int maxStages;
     private bool checkBoss;
+    public GameObject canvasUI;
     /////////////////////////////
 
     // Use this for initialization
@@ -140,6 +141,8 @@ public class PostStageScript : MonoBehaviour {
 
         theGridSystem.EnableGridCollider(true);
         theGridSystem.RenderGrids(true);
+
+        canvasUI.GetComponent<Canvas>().enabled = false;
     }
 
     public void VictoryScreen()

@@ -13,8 +13,6 @@ public class CameraTriggerBuildPhase : MonoBehaviour {
     private BuildingPhaseSystemScript buildingPhaseSystem;
     [SerializeField]
     private CameraController cameraController;
-    [SerializeField]
-    private TouchScreenCameraController tsCameraController;
 
 	// Use this for initialization
 	void Start () {
@@ -35,8 +33,6 @@ public class CameraTriggerBuildPhase : MonoBehaviour {
                 buildingPhaseSystem.gameObject.SetActive(true);
                 GetComponent<CameraMovement>().enabled = true;
                 cameraController.enabled = true;
-                tsCameraController.enabled = true;
-                tsCameraController.transform.GetComponent<Canvas>().enabled = true;
             }
         }
 	}

@@ -18,9 +18,9 @@ public class TouchScreenCameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//#if UNITY_ANDROID == false
-		//	gameObject.SetActive(false);
-		//#endif
+		#if UNITY_ANDROID == false
+			gameObject.SetActive(false);
+		#endif
 
 		if (cameraMovement == null) {
 			return;
